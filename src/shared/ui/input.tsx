@@ -1,13 +1,18 @@
-import * as React from "react"
+import * as React from "react";
 
-import { cn } from "@/shared/utils"
+import { cn } from "@/shared/utils";
+import { Label } from "@radix-ui/react-label";
+import { Typography } from "./typography";
 
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+  error?: string;
+}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, ...props }, ref) => {
-    return (
+  ({ className, type, label, error, ...props }, ref) => {
+    let inputElement = (
       <input
         type={type}
         className={cn(
@@ -17,9 +22,29 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         ref={ref}
         {...props}
       />
-    )
-  }
-)
-Input.displayName = "Input"
+    );
 
-export { Input }
+    if (label) {
+      inputElement = (
+        <Label>
+          {label}
+          {inputElement}
+        </Label>
+      );
+    }
+
+    return (
+      <div>
+        {inputElement}
+        {error && (
+          <Typography affects={"error"} variant={"p"}>
+            {error}
+          </Typography>
+        )}
+      </div>
+    );
+  }
+);
+Input.displayName = "Input";
+
+export { Input };

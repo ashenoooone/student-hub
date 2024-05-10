@@ -26,14 +26,8 @@ export const LoginForm = (props: LoginFormProps) => {
       </CardHeader>
       <CardContent>
         <form className="flex flex-col gap-2">
-          <Label>
-            Логин
-            <Input placeholder="Логин" type="text" />
-          </Label>
-          <Label>
-            Пароль
-            <Input placeholder="Пароль" type="password" />
-          </Label>
+          <Input label="Логин" placeholder="Логин" type="text" />
+          <Input label="Пароль" placeholder="Пароль" type="password" />
           <Button className="mt-4">Авторизоваться</Button>
           <Typography>
             Нет аккаунта?
