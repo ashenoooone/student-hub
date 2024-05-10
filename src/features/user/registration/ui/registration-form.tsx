@@ -6,12 +6,12 @@ import {cn} from "@/shared/utils";
 import Link from "next/link";
 import {ROUTES} from "@/shared/conts";
 
-type LoginFormProps = {
+type RegistrationFormProps = {
   className?: string;
 };
 
-export const LoginForm = (props: LoginFormProps) => {
-  const { className } = props;
+export const RegistrationForm = (props: RegistrationFormProps) => {
+  const {className} = props;
   return (
     <Card className={cn("", className)}>
       <CardHeader>
@@ -20,13 +20,13 @@ export const LoginForm = (props: LoginFormProps) => {
       </CardHeader>
       <CardContent>
         <form className="flex flex-col gap-2">
-          <Input label="Логин" placeholder="Логин" type="text" />
-          <Input label="Пароль" placeholder="Пароль" type="password" />
+          <Input label="Логин" placeholder="Логин" type="text"/>
+          <Input label="Пароль" placeholder="Пароль" type="password"/>
           <Button className="mt-4">Авторизоваться</Button>
           <Typography>
             Нет аккаунта?
             <Button className="ml-2 p-0" variant={"link"}>
-              <Link href={ROUTES.registration}>Зарегистрироваться</Link>
+              <Link href={ROUTES.login}>Войти</Link>
             </Button>
           </Typography>
         </form>
