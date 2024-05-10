@@ -5,7 +5,7 @@ export class EventsService {
   }
 
   async updateEventById(eventId: number | string, event: Omit<EventType, 'id'>) {
-    return $api.put<EventType>(`event/${eventId}`)
+    return $api.put<EventType>(`event/${eventId}`, event)
   }
 
   async createEvent(event: Omit<EventType, 'id'>) {
