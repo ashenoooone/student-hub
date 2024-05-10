@@ -1,4 +1,5 @@
 import {$api} from "@/shared/api";
+import {EventStatus, EventType} from "@/entities/events/model/types";
 
 export class EventsService {
   private constructor() {

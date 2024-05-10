@@ -1,4 +1,4 @@
-type EventType = {
+export type EventType = {
   id: number,
   avatar: string,
   name: string,
@@ -9,8 +9,4 @@ type EventType = {
   membersCount: number
 }
 
-enum EventStatus {
-  PLANNED = 'PLANNED',
-  OPEN = 'OPEN',
-  COMPLETED = 'COMPLETED'
-}
+export type EventStatus = 'PLANNED' | 'OPEN' | 'COMPLETED';
