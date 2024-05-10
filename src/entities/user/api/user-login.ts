@@ -1,5 +1,4 @@
 import { $api } from "@/shared/api";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 type PostLoginUserParams = {
   login: string;
