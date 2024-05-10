@@ -1,11 +1,12 @@
 import {$api} from "@/shared/api";
+import {EventStatus, EventType} from "@/entities/events/model/types";
 
 export class EventsService {
   private constructor() {
   }
 
   async updateEventById(eventId: number | string, event: Omit<EventType, 'id'>) {
-    return $api.put<EventType>(`event/${eventId}`)
+    return $api.put<EventType>(`event/${eventId}`, event)
   }
 
   async createEvent(event: Omit<EventType, 'id'>) {

@@ -10,6 +10,7 @@ import {
 import { Input } from "@/shared/ui/input";
 import { cn } from "@/shared/utils";
 import Link from "next/link";
+import { ROUTES } from "@/shared/conts";
 
 type LoginFormProps = {
   className?: string;
@@ -31,7 +32,7 @@ export const LoginForm = (props: LoginFormProps) => {
           <Typography>
             Нет аккаунта?
             <Button className="ml-2 p-0" variant={"link"}>
-              <Link href={"/registration"}>Зарегистрироваться</Link>
+              <Link href={ROUTES.registration}>Зарегистрироваться</Link>
             </Button>
           </Typography>
         </form>
