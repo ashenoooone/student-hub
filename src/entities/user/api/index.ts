@@ -1,1 +1,1 @@
-export class UserService {}
+export { UsersService } from "./user.service";

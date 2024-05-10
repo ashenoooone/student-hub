@@ -9,7 +9,6 @@ import {
 } from "@/shared/ui/card";
 import { Input } from "@/shared/ui/input";
 import { cn } from "@/shared/utils";
-import { Label } from "@radix-ui/react-label";
 import Link from "next/link";
 
 type LoginFormProps = {
@@ -26,8 +25,8 @@ export const LoginForm = (props: LoginFormProps) => {
       </CardHeader>
       <CardContent>
         <form className="flex flex-col gap-2">
-          <Input label="Логин" placeholder="Логин" type="text" />
-          <Input label="Пароль" placeholder="Пароль" type="password" />
+          <Input required label="Логин" placeholder="Логин" type="text" />
+          <Input required label="Пароль" placeholder="Пароль" type="password" />
           <Button className="mt-4">Авторизоваться</Button>
           <Typography>
             Нет аккаунта?
