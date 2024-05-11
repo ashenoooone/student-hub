@@ -16,6 +16,7 @@ import { useCallback, useState } from "react";
 import { useToast } from "@/shared/ui/use-toast";
 import { isApiError } from "@/shared/api/utils";
 import { useUserStore } from "@/entities/user/model/store";
+import { useRouter } from "next/router";
 
 type LoginFormProps = {
   className?: string;
@@ -28,6 +29,7 @@ export const LoginForm = (props: LoginFormProps) => {
   const loginUser = usePostLoginUserMutation();
   const { toast } = useToast();
   const setUser = useUserStore.use.setUser();
+  const router = useRouter();
 
   const onLoginChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,6 +55,7 @@ export const LoginForm = (props: LoginFormProps) => {
         },
       });
       setUser(response.data);
+      router.push(ROUTES.main);
     } catch (error: unknown) {
       if (isApiError(error)) {
         toast({
