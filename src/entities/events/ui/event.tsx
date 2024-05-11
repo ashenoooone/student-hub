@@ -43,10 +43,10 @@ export const Event = React.memo((props: EventProps) => {
     <Box className={cn("p-10 flex gap-10 justify-between", className)}>
       <div className="basis-2/3 mt-2 flex flex-col">
         {/* main info */}
-        <Typography variant={"h1"} className="mb-2">
+        <Typography variant={"h1"} className="mb-4">
           {event.name}
         </Typography>
-        <Typography affects={"muted"} variant={"p"} className="mb-4">
+        <Typography affects={"muted"} variant={"p"} className="mb-6">
           {event.description}
         </Typography>
         {/* tags */}
