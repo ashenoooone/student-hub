@@ -7,15 +7,12 @@ import { cn, isActiveLink } from "@/shared/utils";
 import { Avatar, AvatarFallback } from "@/shared/ui/avatar";
 import Link from "next/link";
 import React, { useEffect } from "react";
-import Cookies from "js-cookie";
-import { getCookie } from "cookies-next";
 type HeaderProps = {
   className?: string;
 };
 
 export const Header = React.memo((props: HeaderProps) => {
   const { className } = props;
-  const profile = useUserProfileStore.use.profile();
 
   return (
     <Box
@@ -55,26 +52,6 @@ export const Header = React.memo((props: HeaderProps) => {
           </Button>
         </Link>
         {/* TODO вызывает ошибку гидратации исправить */}
-        {/* {profile ? (
-          <Link href={ROUTES.profile}>
-            <Avatar>
-              {/* TODO AVATARKA */}
-        {/* <Image src={profile.} /> */}
-        {/* <AvatarFallback>{profile.email.slice(0, 2)}</AvatarFallback>
-            </Avatar>
-          </Link> */}
-        {/* ) : ( */}
-        {/* <Link href={ROUTES.login}>
-            <Button
-              variant={"link"}
-              className={cn("p-0", {
-                "text-primary": isActiveLink(ROUTES.login),
-              })}
-            >
-              Войти
-            </Button>
-          </Link> */}
-        {/* )} */}
       </div>
     </Box>
   );

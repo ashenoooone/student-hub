@@ -6,7 +6,6 @@ import { Box } from "@/shared/ui/box";
 const Profile = () => {
   const profile = useUserStore.use.profile();
 
-  console.log(profile);
   return (
     <Page>
       <Box>
