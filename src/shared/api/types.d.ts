@@ -33,7 +33,11 @@ interface BaseResponse {
 }
 
 type BaseError = {
-  detail?: string;
+  error: string;
+  message: string;
+  path: string;
+  status: number;
+  timestamp: string;
 };
 
 type ApiError = AxiosError<BaseError>;

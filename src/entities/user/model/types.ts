@@ -22,3 +22,5 @@ export type PostLoginUserParams = {
   password: string;
   login: string;
 };
+
+export type PostLoginUserRequestConfig = RequestConfig<PostLoginUserParams>;

@@ -11,6 +11,10 @@ import { Input } from "@/shared/ui/input";
 import { cn } from "@/shared/utils";
 import Link from "next/link";
 import { ROUTES } from "@/shared/conts";
+import { usePostLoginUserMutation } from "@/entities/user";
+import { useCallback, useState } from "react";
+import { useToast } from "@/shared/ui/use-toast";
+import { isApiError } from "@/shared/api/utils";
 
 type LoginFormProps = {
   className?: string;
@@ -18,6 +22,45 @@ type LoginFormProps = {
 
 export const LoginForm = (props: LoginFormProps) => {
   const { className } = props;
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const loginUser = usePostLoginUserMutation();
+  const { toast } = useToast();
+
+  const onLoginChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setLogin(e.target.value);
+    },
+    []
+  );
+
+  const onPasswordChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setPassword(e.target.value);
+    },
+    []
+  );
+
+  const onLoginSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    try {
+      const response = await loginUser.mutateAsync({
+        params: {
+          login,
+          password,
+        },
+      });
+    } catch (error: unknown) {
+      if (isApiError(error)) {
+        toast({
+          title: "Произошла ошибка",
+          description: error.response?.data?.message,
+          variant: "destructive",
+        });
+      }
+    }
+  };
+
   return (
     <Card className={cn("", className)}>
       <CardHeader>
@@ -25,9 +68,23 @@ export const LoginForm = (props: LoginFormProps) => {
         <CardDescription>Введите логин и пароль</CardDescription>
       </CardHeader>
       <CardContent>
-        <form className="flex flex-col gap-2">
-          <Input required label="Логин" placeholder="Логин" type="text" />
-          <Input required label="Пароль" placeholder="Пароль" type="password" />
+        <form onSubmit={onLoginSubmit} className="flex flex-col gap-2">
+          <Input
+            value={login}
+            onChange={onLoginChange}
+            required
+            label="Логин"
+            placeholder="Логин"
+            type="text"
+          />
+          <Input
+            value={password}
+            onChange={onPasswordChange}
+            required
+            label="Пароль"
+            placeholder="Пароль"
+            type="password"
+          />
           <Button className="mt-4">Авторизоваться</Button>
           <Typography>
             Нет аккаунта?
