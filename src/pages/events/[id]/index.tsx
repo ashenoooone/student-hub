@@ -1,13 +1,17 @@
-import { EventsService } from "@/entities/events";
+import { EventsService, Event } from "@/entities/events";
 import { EventType } from "@/entities/events/model/types";
 import { Page } from "@/shared/ui/page";
-import { log } from "console";
-import { GetStaticProps } from "next";
-import { useRouter } from "next/router";
+import { GetStaticProps, InferGetStaticPropsType } from "next";
 
-export default function Event() {
-  const router = useRouter();
-  return <Page>Post: {router.query.id}</Page>;
+export default function EventPage(
+  props: InferGetStaticPropsType<typeof getStaticProps>
+) {
+  const { event } = props;
+  return (
+    <Page>
+      <Event event={event} />
+    </Page>
+  );
 }
 
 export async function getStaticPaths() {
@@ -23,6 +27,7 @@ export async function getStaticPaths() {
     }));
     return { paths, fallback: "blocking" };
   } catch (e) {
+    console.log(e);
     throw e;
   }
 }
@@ -38,6 +43,7 @@ export const getStaticProps = (async (context) => {
     });
     return { props: { event: event.data }, revalidate: 15 };
   } catch (e) {
+    console.log(e);
     throw e;
   }
 }) satisfies GetStaticProps<{

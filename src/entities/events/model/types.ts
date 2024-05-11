@@ -1,3 +1,9 @@
+export type Member = {
+  id: number;
+  name: string;
+  avatar: string;
+};
+
 export type EventType = {
   id: number;
   avatar: string;
@@ -7,6 +13,7 @@ export type EventType = {
   endDate: string;
   status: string;
   membersCount: number;
+  members?: Member[];
 };
 
 export type EventStatus = "PLANNED" | "OPEN" | "COMPLETED";

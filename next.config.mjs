@@ -4,6 +4,9 @@ const nextConfig = {
   env: {
     API_URL: "https://it-hub.fita.cc/",
   },
+  images: {
+    domains: ["pixelbox.ru", "distribution.faceit-cdn.net"],
+  },
 };
 
 export default nextConfig;
