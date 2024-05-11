@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookie from "js-cookie";
-import { COOKIE_USER } from "@/entities/user";
+import { COOKIE_USER, useUserStore } from "@/entities/user";
 import { TokensResponseType } from "@/entities/user/model/types";
 
 const baseUrl = process.env.API_URL;

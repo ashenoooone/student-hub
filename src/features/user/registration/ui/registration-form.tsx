@@ -12,7 +12,7 @@ import { cn } from "@/shared/utils";
 import Link from "next/link";
 import { ROUTES } from "@/shared/conts";
 import { FormEventHandler } from "react";
-import { UsersService } from "@/entities/user";
+import { UsersService, useUserProfileStore } from "@/entities/user";
 import { PostRegisterUserParams } from "@/entities/user/model/types";
 import { useUserStore } from "@/entities/user";
 import { isApiError } from "@/shared/api/utils";
@@ -27,7 +27,7 @@ export const RegistrationForm = (props: RegistrationFormProps) => {
   const { className } = props;
   const router = useRouter();
   const setUser = useUserStore.use.setUser();
-  const setProfile = useUserStore.use.setProfile();
+  const setProfile = useUserProfileStore.use.setProfile();
   const { toast } = useToast();
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {

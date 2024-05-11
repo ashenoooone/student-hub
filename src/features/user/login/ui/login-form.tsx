@@ -11,7 +11,11 @@ import { Input } from "@/shared/ui/input";
 import { cn } from "@/shared/utils";
 import Link from "next/link";
 import { ROUTES } from "@/shared/conts";
-import { usePostLoginUserMutation } from "@/entities/user";
+import {
+  UsersService,
+  usePostLoginUserMutation,
+  useUserProfileStore,
+} from "@/entities/user";
 import { useCallback, useState } from "react";
 import { useToast } from "@/shared/ui/use-toast";
 import { isApiError } from "@/shared/api/utils";
@@ -30,6 +34,7 @@ export const LoginForm = (props: LoginFormProps) => {
   const { toast } = useToast();
   const setUser = useUserStore.use.setUser();
   const router = useRouter();
+  const setProfile = useUserProfileStore.use.setProfile();
 
   const onLoginChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,7 +60,9 @@ export const LoginForm = (props: LoginFormProps) => {
         },
       });
       setUser(response.data);
-      router.push(ROUTES.main);
+      const { data: profile } = await UsersService.instance.getUserData();
+      setProfile(profile);
+      await router.replace(ROUTES.main);
     } catch (error: unknown) {
       if (isApiError(error)) {
         toast({

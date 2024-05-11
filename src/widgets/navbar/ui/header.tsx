@@ -1,20 +1,19 @@
-import { useUserStore } from "@/entities/user";
+import { useUserProfileStore } from "@/entities/user";
 import { ROUTES } from "@/shared/conts";
 import { Box } from "@/shared/ui/box";
 import { Button } from "@/shared/ui/button";
 import { Typography } from "@/shared/ui/typography";
 import { cn, isActiveLink } from "@/shared/utils";
-import { Avatar } from "@radix-ui/react-avatar";
+import { Avatar, AvatarFallback } from "@/shared/ui/avatar";
 import Link from "next/link";
 import React from "react";
-
 type HeaderProps = {
   className?: string;
 };
 
 export const Header = React.memo((props: HeaderProps) => {
   const { className } = props;
-  const userAuth = useUserStore.use.profile();
+  const profile = useUserProfileStore.use.profile();
 
   return (
     <Box
@@ -53,8 +52,14 @@ export const Header = React.memo((props: HeaderProps) => {
             Проекты
           </Button>
         </Link>
-        {userAuth ? (
-          <Avatar />
+        {profile ? (
+          <Link href={ROUTES.profile}>
+            <Avatar>
+              {/* TODO AVATARKA */}
+              {/* <Image src={profile.} /> */}
+              <AvatarFallback>{profile.email.slice(0, 2)}</AvatarFallback>
+            </Avatar>
+          </Link>
         ) : (
           <Link href={ROUTES.login}>
             <Button
