@@ -1,10 +1,10 @@
-import { $api } from "@/shared/api";
+import {$api} from "@/shared/api";
 import {
-  PostLoginUserParams,
   PostLoginUserRequestConfig,
   PostRefreshUserParams,
   PostRegisterUserParams,
   TokensResponseType,
+  UserType,
 } from "../model/types";
 
 export class UsersService {
@@ -26,6 +26,16 @@ export class UsersService {
   // TODO request config
   async register(data: PostRegisterUserParams) {
     return $api.post<TokensResponseType>("auth/register", data);
+  }
+
+  // TODO request config
+  async getUserData() {
+    return $api.get<UserType>('users/me')
+  }
+
+  // TODO request config
+  async getUserById(id: number | string) {
+    return $api.get<UserType>(`users/${id}`)
   }
 
   static instance = new UsersService();

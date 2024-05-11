@@ -24,3 +24,11 @@ export type PostLoginUserParams = {
 };
 
 export type PostLoginUserRequestConfig = RequestConfig<PostLoginUserParams>;
+
+export type UserType = {
+  id: number,
+  login: string,
+  email: string,
+  roles: string[],
+  rolesForProject: string[]
+}
