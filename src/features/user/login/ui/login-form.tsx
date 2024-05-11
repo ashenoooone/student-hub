@@ -15,7 +15,7 @@ import { usePostLoginUserMutation } from "@/entities/user";
 import { useCallback, useState } from "react";
 import { useToast } from "@/shared/ui/use-toast";
 import { isApiError } from "@/shared/api/utils";
-import { useUserStore } from "@/entities/user/model/store";
+import { useUserStore } from "@/entities/user";
 import { useRouter } from "next/router";
 
 type LoginFormProps = {

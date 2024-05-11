@@ -10,7 +10,7 @@ export const Page = (props: PageProps) => {
   return (
     <div
       className={cn(
-        "container flex flex-col gap-sm flex-grow overflow-y-auto flex-shrink px-[20px] pt-[20px] pb-[45px]",
+        "max-w-[1280px] flex flex-col flex-grow flex-shrink-0 box-border gap-sm overflow-y-auto",
         className
       )}
     >

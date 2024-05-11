@@ -1,7 +1,7 @@
-import {createStore} from "zustand";
-import {TokensResponseType, UserType} from "@/entities/user/model/types";
+import { createStore } from "zustand";
+import { TokensResponseType, UserType } from "@/entities/user/model/types";
 import Cookies from "js-cookie";
-import {createSelectors} from "@/shared/utils";
+import { createSelectors } from "@/shared/utils";
 
 type UserStateType = {
   user: TokensResponseType | null;
@@ -11,7 +11,7 @@ type UserStateType = {
 };
 
 export const COOKIE_USER = "cookie_user";
-const COOKIE_PROFILE = 'cookie_profile';
+const COOKIE_PROFILE = "cookie_profile";
 
 const store = createStore<UserStateType>()((set) => ({
   user: Cookies.get(COOKIE_USER)
@@ -25,10 +25,11 @@ const store = createStore<UserStateType>()((set) => ({
   profile: Cookies.get(COOKIE_PROFILE)
     ? (JSON.parse(Cookies.get(COOKIE_PROFILE)!) as UserType)
     : null,
-  setProfile: (profile) => set((state) => {
-    Cookies.set(COOKIE_PROFILE, JSON.stringify(profile));
-    return {...state, profile}
-  })
+  setProfile: (profile) =>
+    set((state) => {
+      Cookies.set(COOKIE_PROFILE, JSON.stringify(profile));
+      return { ...state, profile };
+    }),
 }));
 
 export const useUserStore = createSelectors(store);

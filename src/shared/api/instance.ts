@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookie from "js-cookie";
-import {COOKIE_USER} from "@/entities/user/model/store";
-import {TokensResponseType} from "@/entities/user/model/types";
+import { COOKIE_USER } from "@/entities/user";
+import { TokensResponseType } from "@/entities/user/model/types";
 
 const baseUrl = process.env.API_URL;
 
@@ -14,8 +14,8 @@ $api.interceptors.request.use((config) => {
   const token = JSON.parse(Cookie.get(COOKIE_USER)!) as TokensResponseType;
 
   if (token) {
-    config.headers.Authorization = `${token.type} ${token.accessToken}`
+    config.headers.Authorization = `${token.type} ${token.accessToken}`;
   }
 
   return config;
-})
+});

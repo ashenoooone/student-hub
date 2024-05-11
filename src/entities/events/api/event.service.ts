@@ -1,41 +1,57 @@
-import {$api} from "@/shared/api";
-import {EventStatus, EventType} from "@/entities/events/model/types";
+import { $api } from "@/shared/api";
+import {
+  EventStatus,
+  EventType,
+  GetAllEventsRequestConfig,
+  GetEventByIdRequestConfig,
+} from "@/entities/events/model/types";
+import { createInflate } from "zlib";
 
 export class EventsService {
-  private constructor() {
+  private constructor() {}
+
+  async updateEventById(
+    eventId: number | string,
+    event: Omit<EventType, "id">
+  ) {
+    return $api.put<EventType>(`event/${eventId}`, event);
   }
 
-  async updateEventById(eventId: number | string, event: Omit<EventType, 'id'>) {
-    return $api.put<EventType>(`event/${eventId}`, event)
-  }
-
-  async createEvent(event: Omit<EventType, 'id'>) {
-    return $api.post<EventType>('events', event);
+  async createEvent(event: Omit<EventType, "id">) {
+    return $api.post<EventType>("events", event);
   }
 
   async updateEventStatus(eventId: number | string, status: EventStatus) {
     return $api.patch<EventType>(`events/${eventId}/status`, null, {
       params: {
-        eventStatusIn: status
-      }
-    })
+        eventStatusIn: status,
+      },
+    });
   }
 
   async deleteEventAvatar(id: number | string) {
-    return $api.delete<EventType>(`events/${id}/avatar`)
+    return $api.delete<EventType>(`events/${id}/avatar`);
   }
 
   async setEventAvatar() {
-    throw new Error('Api not implementations')
+    throw new Error("Api not implementations");
   }
 
-  async getEventById(id: number | string) {
-    return $api.get<EventType>(`events/${id}`)
+  async getEventById(config: GetEventByIdRequestConfig) {
+    return $api.get<EventType>(`events/${config.params.id}`, config.config);
   }
 
-  async getAll() {
-    return $api.get<EventType[]>('events/all')
+  async getAll(config?: GetAllEventsRequestConfig) {
+    let url = "events/all";
+
+    if (config?.params.page) {
+      url += "?page=" + config?.params.page;
+    } else {
+      url += "?page=1";
+    }
+
+    return $api.get<EventType[]>(url, config?.config);
   }
 
-  static instance = new EventsService()
+  static instance = new EventsService();
 }

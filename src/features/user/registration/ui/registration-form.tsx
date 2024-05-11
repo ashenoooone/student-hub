@@ -1,17 +1,23 @@
-import {Typography} from "@/shared/ui/typography";
-import {Button} from "@/shared/ui/button";
-import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from "@/shared/ui/card";
-import {Input} from "@/shared/ui/input";
-import {cn} from "@/shared/utils";
+import { Typography } from "@/shared/ui/typography";
+import { Button } from "@/shared/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/shared/ui/card";
+import { Input } from "@/shared/ui/input";
+import { cn } from "@/shared/utils";
 import Link from "next/link";
-import {ROUTES} from "@/shared/conts";
-import {FormEventHandler} from "react";
-import {UsersService} from "@/entities/user";
-import {PostRegisterUserParams} from "@/entities/user/model/types";
-import {useUserStore} from "@/entities/user/model/store";
-import {isApiError} from "@/shared/api/utils";
-import {useToast} from "@/shared/ui/use-toast";
-import {useRouter} from "next/router";
+import { ROUTES } from "@/shared/conts";
+import { FormEventHandler } from "react";
+import { UsersService } from "@/entities/user";
+import { PostRegisterUserParams } from "@/entities/user/model/types";
+import { useUserStore } from "@/entities/user";
+import { isApiError } from "@/shared/api/utils";
+import { useToast } from "@/shared/ui/use-toast";
+import { useRouter } from "next/router";
 
 type RegistrationFormProps = {
   className?: string;
@@ -19,7 +25,7 @@ type RegistrationFormProps = {
 
 export const RegistrationForm = (props: RegistrationFormProps) => {
   const { className } = props;
-  const router = useRouter()
+  const router = useRouter();
   const setUser = useUserStore.use.setUser();
   const setProfile = useUserStore.use.setProfile();
   const { toast } = useToast();
@@ -33,7 +39,7 @@ export const RegistrationForm = (props: RegistrationFormProps) => {
         Object.fromEntries(formData) as PostRegisterUserParams
       );
       setUser(tokens);
-      const {data: profile} = await UsersService.instance.getUserData();
+      const { data: profile } = await UsersService.instance.getUserData();
       setProfile(profile);
       await router.replace(ROUTES.main);
     } catch (e) {
@@ -82,7 +88,7 @@ export const RegistrationForm = (props: RegistrationFormProps) => {
           <Button className="mt-4">Зарегистрироваться</Button>
           <Typography>
             Есть аккаунт?
-            <Button type={'submit'} className="ml-2 p-0" variant={"link"}>
+            <Button type={"submit"} className="ml-2 p-0" variant={"link"}>
               <Link href={ROUTES.login}>Войти</Link>
             </Button>
           </Typography>
