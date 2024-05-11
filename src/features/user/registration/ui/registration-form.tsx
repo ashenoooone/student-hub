@@ -85,6 +85,33 @@ export const RegistrationForm = (props: RegistrationFormProps) => {
             required
             minLength={3}
           />
+          <div className="flex gap-2">
+            <Input
+              name="lastName"
+              label="Фамилия"
+              placeholder="Фамилия"
+              type="text"
+              required
+              minLength={2}
+              className="basis-3/5"
+            />
+            <Input
+              name="firstName"
+              label="Имя"
+              placeholder="Имя"
+              type="text"
+              required
+              minLength={3}
+              className="basis-2/5"
+            />
+          </div>
+          <Input
+            name="middleName"
+            label="Отчество"
+            placeholder="Отчество"
+            type="text"
+            minLength={3}
+          />
           <Button className="mt-4">Зарегистрироваться</Button>
           <Typography>
             Есть аккаунт?
