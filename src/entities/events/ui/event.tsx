@@ -7,6 +7,7 @@ import Image from "next/image";
 import { CalendarIcon, ImageIcon } from "@radix-ui/react-icons";
 import { MembersList } from "@/shared/ui/members";
 import { ROUTES } from "@/shared/conts";
+import { NoImageAvailable } from "@/shared/assets/noImageAvailable";
 
 // for test members
 // [
@@ -55,8 +56,8 @@ export const Event = React.memo((props: EventProps) => {
           <div className="flex items-center gap-2">
             <CalendarIcon className="w-5 h-5" />
             <Typography>
-              {formatToRussianDate(event.startDate)} -{" "}
-              {formatToRussianDate(event.endDate)}
+              {formatToRussianDate(event.startDate, true)} -{" "}
+              {formatToRussianDate(event.endDate, true)}
             </Typography>
           </div>
         </div>
@@ -66,12 +67,10 @@ export const Event = React.memo((props: EventProps) => {
           <Image
             alt={event.name}
             className="h-[240px] w-[240px] object-cover rounded-md"
-            src={event.avatar ?? NoImageAvailable}
+            src={event.avatar}
           />
         ) : (
-          <div className="h-[240px] w-[240px] bg-muted rounded-md flex items-center justify-center">
-            <ImageIcon className="w-10 h-10 text-muted-foreground" />
-          </div>
+          <NoImageAvailable className="h-[240px] w-[240px] " />
         )}
         {event.members && (
           <div className="mt-5">

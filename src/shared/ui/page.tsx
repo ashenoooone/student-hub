@@ -10,7 +10,7 @@ export const Page = (props: PageProps) => {
   return (
     <div
       className={cn(
-        "max-w-[1280px] mx-auto w-full flex flex-col flex-grow flex-shrink-0 box-border gap-sm overflow-y-auto",
+        "max-w-[1280px] mx-auto w-full flex flex-col flex-grow flex-shrink-0 box-border gap-sm",
         className
       )}
     >

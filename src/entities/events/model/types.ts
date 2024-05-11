@@ -6,7 +6,7 @@ export type Member = {
 
 export type EventType = {
   id: number;
-  avatar: string;
+  avatar: string | null;
   name: string;
   description: string;
   startDate: string;
