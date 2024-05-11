@@ -5,7 +5,6 @@ import { Typography } from "@/shared/ui/typography";
 import { cn, formatToRussianDate } from "@/shared/utils";
 import Image from "next/image";
 import NoImageAvailable from "@/shared/assets/no_image_available.jpg";
-import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { CalendarIcon, ImageIcon } from "@radix-ui/react-icons";
 import { MembersList } from "@/shared/ui/members";
 import { ROUTES } from "@/shared/conts";
