@@ -15,6 +15,7 @@ import { usePostLoginUserMutation } from "@/entities/user";
 import { useCallback, useState } from "react";
 import { useToast } from "@/shared/ui/use-toast";
 import { isApiError } from "@/shared/api/utils";
+import { useUserStore } from "@/entities/user/model/store";
 
 type LoginFormProps = {
   className?: string;
@@ -26,6 +27,7 @@ export const LoginForm = (props: LoginFormProps) => {
   const [password, setPassword] = useState("");
   const loginUser = usePostLoginUserMutation();
   const { toast } = useToast();
+  const setUser = useUserStore.use.setUser();
 
   const onLoginChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,6 +52,7 @@ export const LoginForm = (props: LoginFormProps) => {
           password,
         },
       });
+      setUser(response.data);
     } catch (error: unknown) {
       if (isApiError(error)) {
         toast({
