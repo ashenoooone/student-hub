@@ -16,7 +16,7 @@ type EventsFiltersProps = {
 
 const SelectGroups: SelectGroupItem<EventStatus | "ALL">[] = [
   {
-    groupLabel: "Статусы",
+    groupLabel: "Статус",
     selectItems: [
       {
         label: "Все",
@@ -46,6 +46,7 @@ export const EventsFilters = React.memo((props: EventsFiltersProps) => {
       />
       <div className="mt-2">
         <Select
+          defaultValue="ALL"
           groups={SelectGroups}
           trigger="Статус"
           className="bg-white border-none max-w-[200px]"
