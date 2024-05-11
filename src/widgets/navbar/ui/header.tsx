@@ -59,12 +59,12 @@ export const Header = React.memo((props: HeaderProps) => {
           <Link href={ROUTES.profile}>
             <Avatar>
               {/* TODO AVATARKA */}
-              {/* <Image src={profile.} /> */}
-              <AvatarFallback>{profile.email.slice(0, 2)}</AvatarFallback>
+        {/* <Image src={profile.} /> */}
+        {/* <AvatarFallback>{profile.email.slice(0, 2)}</AvatarFallback>
             </Avatar>
-          </Link>
-        ) : (
-          <Link href={ROUTES.login}>
+          </Link> */}
+        {/* ) : ( */}
+        {/* <Link href={ROUTES.login}>
             <Button
               variant={"link"}
               className={cn("p-0", {
@@ -73,8 +73,8 @@ export const Header = React.memo((props: HeaderProps) => {
             >
               Войти
             </Button>
-          </Link>
-        )} */}
+          </Link> */}
+        {/* )} */}
       </div>
     </Box>
   );
