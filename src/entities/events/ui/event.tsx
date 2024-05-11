@@ -4,7 +4,6 @@ import { Box } from "@/shared/ui/box";
 import { Typography } from "@/shared/ui/typography";
 import { cn, formatToRussianDate } from "@/shared/utils";
 import Image from "next/image";
-import NoImageAvailable from "@/shared/assets/no_image_available.jpg";
 import { CalendarIcon, ImageIcon } from "@radix-ui/react-icons";
 import { MembersList } from "@/shared/ui/members";
 import { ROUTES } from "@/shared/conts";
