@@ -1,4 +1,4 @@
-import { useUserProfileStore } from "@/entities/user";
+import { COOKIE_PROFILE, useUserProfileStore } from "@/entities/user";
 import { ROUTES } from "@/shared/conts";
 import { Box } from "@/shared/ui/box";
 import { Button } from "@/shared/ui/button";
@@ -6,7 +6,9 @@ import { Typography } from "@/shared/ui/typography";
 import { cn, isActiveLink } from "@/shared/utils";
 import { Avatar, AvatarFallback } from "@/shared/ui/avatar";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
+import Cookies from "js-cookie";
+import { getCookie } from "cookies-next";
 type HeaderProps = {
   className?: string;
 };
@@ -52,7 +54,8 @@ export const Header = React.memo((props: HeaderProps) => {
             Проекты
           </Button>
         </Link>
-        {profile ? (
+        {/* TODO вызывает ошибку гидратации исправить */}
+        {/* {profile ? (
           <Link href={ROUTES.profile}>
             <Avatar>
               {/* TODO AVATARKA */}
@@ -71,7 +74,7 @@ export const Header = React.memo((props: HeaderProps) => {
               Войти
             </Button>
           </Link>
-        )}
+        )} */}
       </div>
     </Box>
   );
