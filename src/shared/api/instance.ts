@@ -11,10 +11,11 @@ export const $api = axios.create({
 
 // TODO: добавить проверку что если запрос упал, то обновить токены по рефреш токену
 $api.interceptors.request.use((config) => {
-  const token = JSON.parse(Cookie.get(COOKIE_USER)!) as TokensResponseType;
+  const cookieToken = Cookie.get(COOKIE_USER);
 
-  if (token) {
-    config.headers.Authorization = `${token.type} ${token.accessToken}`;
+  if (cookieToken) {
+    const parsedTokens = JSON.parse(cookieToken) as TokensResponseType;
+    config.headers.Authorization = `${parsedTokens.type} ${parsedTokens.accessToken}`;
   }
 
   return config;

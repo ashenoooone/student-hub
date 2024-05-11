@@ -12,9 +12,14 @@ export default function Event() {
 
 export async function getStaticPaths() {
   try {
-    const events = await EventsService.instance.getAll();
+    const events = await EventsService.instance.getAll({
+      params: {
+        limit: 1000,
+        status: "OPEN",
+      },
+    });
     const paths = events.data.map((event) => ({
-      params: { id: event.id },
+      params: { id: `${event.id}` },
     }));
     return { paths, fallback: "blocking" };
   } catch (e) {
@@ -23,7 +28,7 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps = (async (context) => {
-  const { id } = context.params as { id: string };
+  const { id } = context.params as { id: string | number };
 
   try {
     const event = await EventsService.instance.getEventById({

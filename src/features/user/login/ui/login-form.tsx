@@ -63,6 +63,8 @@ export const LoginForm = (props: LoginFormProps) => {
           description: error.response?.data?.message,
           variant: "destructive",
         });
+      } else {
+        console.error(error);
       }
     }
   };
