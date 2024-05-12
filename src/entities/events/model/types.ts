@@ -28,4 +28,12 @@ export type GetAllEventsParams = {
   limit?: number;
   status?: EventStatus | "ALL";
 };
+
+export type GetAllEventsResponse = {
+  content: EventType[];
+  page: number;
+  size: number;
+  totalPages: number;
+};
+
 export type GetAllEventsRequestConfig = RequestConfig<GetAllEventsParams>;

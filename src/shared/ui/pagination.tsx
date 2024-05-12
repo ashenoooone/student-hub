@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import { cn } from "../utils";
 import { Button } from "./button";
 import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons";
+import { log } from "console";
 
 export const DOTS = "...";
 
@@ -107,6 +108,8 @@ const Pagination = (props: PaginationProps) => {
   });
 
   if (currentPage === 0 || !paginationRange || paginationRange?.length < 2) {
+    console.log(paginationRange);
+
     return null;
   }
 

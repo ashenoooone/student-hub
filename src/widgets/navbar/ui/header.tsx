@@ -32,17 +32,29 @@ const UserAvatar = (props: UserType & { className?: string }) => {
       <DropdownMenuContent className={props.className}>
         <DropdownMenuLabel>Мой аккаунт</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="flex items-center gap-2">
-          <HomeIcon className="w-4 h-4" />
-          <Link href={ROUTES.profile}>Профиль</Link>
+        <DropdownMenuItem>
+          <Link
+            className="flex items-center gap-2 w-full"
+            href={ROUTES.profile}
+          >
+            <HomeIcon className="w-4 h-4" />
+            Профиль
+          </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem className="flex items-center gap-2">
-          <ArchiveIcon className="w-4 h-4" />
-          <Link href={ROUTES.projects}>Мои проекты</Link>
+        <DropdownMenuItem>
+          <Link
+            className="flex items-center gap-2 w-full"
+            href={ROUTES.projects}
+          >
+            <ArchiveIcon className="w-4 h-4" />
+            Мои проекты
+          </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem className="flex items-center gap-2">
-          <ExitIcon className="w-4 h-4" />
-          <Link href={ROUTES.logout}>Выйти</Link>
+        <DropdownMenuItem>
+          <Link className="flex items-center gap-2 w-full" href={ROUTES.logout}>
+            <ExitIcon className="w-4 h-4" />
+            Выйти
+          </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
