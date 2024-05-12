@@ -51,7 +51,7 @@ export const EventsListWithFilters = React.memo(
         <Pagination
           className="self-center mt-4"
           onPageChange={onPageChange}
-          totalCount={data?.totalPages * filters?.limit ?? 10}
+          totalCount={data ? data.totalPages * data.size : 10}
           currentPage={filters.page ?? 1}
           pageSize={filters?.limit ?? 10}
         />
