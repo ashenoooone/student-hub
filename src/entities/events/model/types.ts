@@ -23,7 +23,7 @@ type GetEventByIdParams = {
 };
 export type GetEventByIdRequestConfig = RequestConfig<GetEventByIdParams>;
 
-type GetAllEventsParams = {
+export type GetAllEventsParams = {
   page?: number;
   limit?: number;
   status?: EventStatus | "ALL";

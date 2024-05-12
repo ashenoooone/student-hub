@@ -3,16 +3,15 @@ import { Input } from "@/shared/ui/input";
 import { Select, SelectGroupItem } from "@/shared/ui/select";
 import { cn } from "@/shared/utils";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import React from "react";
+import React, { useCallback } from "react";
 
 type EventsFiltersProps = {
   className?: string;
+  onChangeSearch?: (value: string) => void;
+  onChangeStatus?: (value: EventStatus | "ALL") => void;
+  searchValue?: string;
+  status?: EventStatus | "ALL";
 };
-
-// PLANNED
-// OPEN
-// COMPLETED
-// ALL
 
 const SelectGroups: SelectGroupItem<EventStatus | "ALL">[] = [
   {
@@ -35,10 +34,21 @@ const SelectGroups: SelectGroupItem<EventStatus | "ALL">[] = [
 ];
 
 export const EventsFilters = React.memo((props: EventsFiltersProps) => {
-  const { className } = props;
+  const { className, onChangeSearch, onChangeStatus, searchValue, status } =
+    props;
+
+  const onChangeSearchHandler = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      onChangeSearch?.(event.target.value);
+    },
+    [onChangeSearch]
+  );
+
   return (
     <div className={cn("", className)}>
       <Input
+        value={searchValue}
+        onChange={onChangeSearchHandler}
         className="w-full"
         icon={<MagnifyingGlassIcon className="w-4 h-4" />}
         inputStyles="bg-white px-9 py-7 border-0"
@@ -46,6 +56,8 @@ export const EventsFilters = React.memo((props: EventsFiltersProps) => {
       />
       <div className="mt-2">
         <Select
+          value={status}
+          onValueChange={onChangeStatus}
           defaultValue="ALL"
           groups={SelectGroups}
           trigger="Статус"

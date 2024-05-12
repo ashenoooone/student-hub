@@ -52,10 +52,14 @@ export class EventsService {
 
     if (config?.params.limit) {
       url += "&limit=" + config?.params.limit;
+    } else {
+      url += "&limit=10";
     }
 
     if (config?.params.status) {
       url += "&status=" + config?.params.status;
+    } else {
+      url += "&status=ALL";
     }
 
     return $api.get<EventType[]>(url, config?.config);
