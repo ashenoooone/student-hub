@@ -1,4 +1,4 @@
-import { $api } from "@/shared/api";
+import {$api} from "@/shared/api";
 import {
   EventStatus,
   EventType,
@@ -6,7 +6,6 @@ import {
   GetAllEventsResponse,
   GetEventByIdRequestConfig,
 } from "@/entities/events/model/types";
-import { createInflate } from "zlib";
 
 export class EventsService {
   private constructor() {}

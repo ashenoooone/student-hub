@@ -1,15 +1,17 @@
 import {Page} from "@/shared/ui/page";
-import {Typography} from "@/shared/ui/typography";
-import {Box} from "@/shared/ui/box";
 import {GetServerSideProps} from "next";
 import React, {FC} from "react";
 import {UsersService} from "@/entities/user";
 import {TokensResponseType, UserType} from "@/entities/user/model/types";
-import {Avatar, AvatarFallback} from "@/shared/ui/avatar";
-import {EnvelopeOpenIcon} from "@radix-ui/react-icons";
+import {ProjectService, ProjectType} from "@/entities/project";
+import {Events, Info, ProfileHeader, ProjectList} from "@/pages-composite/profile-page";
+import {EventsService} from "@/entities/events";
+import {EventType} from "@/entities/events/model/types";
 
 type Props = {
   profile: UserType;
+  project: ProjectType;
+  events: EventType[];
 }
 
 export const getServerSideProps = (async (context) => {
@@ -17,7 +19,7 @@ export const getServerSideProps = (async (context) => {
 
   const token = JSON.parse(context.req.cookies.cookie_user) as TokensResponseType;
 
-  const config = {
+  const authConfig = {
     config: {
       headers: {
         Authorization: `${token.type} ${token.accessToken}`
@@ -25,69 +27,40 @@ export const getServerSideProps = (async (context) => {
     }
   }
 
-  const [] = await Promise.allSettled([
-    UsersService.instance.getUserData(config),
-
+  const [profile, projects, events] = await Promise.all([
+    UsersService.instance.getUserData(authConfig),
+    ProjectService.instance.getAll({
+      config: {
+        ...authConfig.config,
+        params: {
+          page: 1
+        }
+      },
+    }),
+    EventsService.instance.getAll()
   ])
 
-  const {data: profile} = await UsersService.instance.getUserData({
-    config: {
-      headers: {
-        Authorization: `${token.type} ${token.accessToken}`
-      }
-    }
-  });
   return {
     props: {
-      profile
+      profile: profile.data,
+      project: projects.data[0],
+      events: events.data.content.slice(0, 4)
     }
   }
 }) satisfies GetServerSideProps<Props>
 
-const Profile: FC<Props> = ({profile}) => {
-  console.log(profile)
+const Profile: FC<Props> = ({profile, project, events}) => {
+  console.log(profile, project, events)
   return (
     <Page>
-      <Box className={'flex flex-col gap-4 items-center bg-gradient-to-r from-pink-200 via-green-100 to-blue-300'}>
-        <Box className={'w-max flex flex-col gap-4 items-center bg-black/20'}>
-          <Avatar className={'w-[115px] h-[115px] text-5xl'}>
-            <AvatarFallback>{profile.login.slice(0, 2)}</AvatarFallback>
-          </Avatar>
-          <Typography
-            variant={'h1'}
-            affects={"large"}
-            className={'text-3xl text-white'}
-          >
-            {profile?.firstName} {profile?.middleName} {profile?.lastName}</Typography>
-        </Box>
-      </Box>
+      <ProfileHeader profile={profile}/>
       <div className={'flex flex-row gap-4 pt-5 w-full'}>
         <div className={'w-1/4 flex flex-col gap-4'}>
-          <Box className={'w-full flex flex-col gap-2'}>
-            <Typography
-              variant={'h3'}
-            >
-              Дополнительно
-            </Typography>
-            <Typography className={'flex gap-1 items-center'} affects={'link'}><EnvelopeOpenIcon/> {profile?.email}
-            </Typography>
-          </Box>
+          <Info profile={profile}/>
         </div>
         <div className={'w-3/4 flex flex-col gap-4'}>
-          <Box className={'w-full'}>
-            <Typography
-              variant={'h3'}
-            >
-              Проекты
-            </Typography>
-          </Box>
-          <Box>
-            <Typography
-              variant={'h3'}
-            >
-              Мероприятия
-            </Typography>
-          </Box>
+          <ProjectList project={project}/>
+          <Events events={events}/>
         </div>
       </div>
     </Page>

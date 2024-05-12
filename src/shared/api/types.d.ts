@@ -42,6 +42,13 @@ type BaseError = {
 
 type ApiError = AxiosError<BaseError>;
 
+type PaginationType<T> = {
+  page: number;
+  size: number;
+  totalPages: number;
+  content: T
+}
+
 // ~~~ ПРИМЕР МУТАЦИИ ~~~
 
 // type PostCreateStrategyParams = {
