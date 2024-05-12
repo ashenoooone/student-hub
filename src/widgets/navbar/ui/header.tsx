@@ -92,7 +92,7 @@ export const Header = React.memo((props: HeaderProps) => {
           </Button>
         </Link>
         {userProfileHydrated && userProfile ? (
-          <UserAvatar className="mr-2" {...userProfile} />
+          <UserAvatar {...userProfile} />
         ) : (
           <Link href={ROUTES.login}>
             <Button variant="link">Войти</Button>
