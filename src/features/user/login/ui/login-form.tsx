@@ -1,26 +1,15 @@
-import { Typography } from "@/shared/ui/typography";
-import { Button } from "@/shared/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/shared/ui/card";
-import { Input } from "@/shared/ui/input";
-import { cn } from "@/shared/utils";
+import {Typography} from "@/shared/ui/typography";
+import {Button} from "@/shared/ui/button";
+import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from "@/shared/ui/card";
+import {Input} from "@/shared/ui/input";
+import {cn} from "@/shared/utils";
 import Link from "next/link";
-import { ROUTES } from "@/shared/conts";
-import {
-  UsersService,
-  usePostLoginUserMutation,
-  useUserProfileStore,
-} from "@/entities/user";
-import { useCallback, useState } from "react";
-import { useToast } from "@/shared/ui/use-toast";
-import { isApiError } from "@/shared/api/utils";
-import { useUserStore } from "@/entities/user";
-import { useRouter } from "next/router";
+import {ROUTES} from "@/shared/conts";
+import {usePostLoginUserMutation, UsersService, useUserProfileStore, useUserStore,} from "@/entities/user";
+import {useCallback, useState} from "react";
+import {useToast} from "@/shared/ui/use-toast";
+import {isApiError} from "@/shared/api/utils";
+import {useRouter} from "next/router";
 
 type LoginFormProps = {
   className?: string;

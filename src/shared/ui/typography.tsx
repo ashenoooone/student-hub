@@ -1,6 +1,6 @@
-import { cva, type VariantProps } from "class-variance-authority";
+import {cva, type VariantProps} from "class-variance-authority";
 import React from "react";
-import { cn } from "../utils";
+import {cn} from "../utils";
 
 export const typographyVariants = cva("text-xl", {
   variants: {
@@ -18,6 +18,7 @@ export const typographyVariants = cva("text-xl", {
       muted: "text-sm text-muted-foreground",
       error: "text-red-800 font-bold",
       removePMargin: "[&:not(:first-child)]:mt-0",
+      link: 'text-primary underline-none cursor-pointer hover:underline underline-offset-2'
     },
   },
   defaultVariants: {

@@ -29,8 +29,8 @@ export class UsersService {
   }
 
   // TODO request config
-  async getUserData() {
-    return $api.get<UserType>('users/me')
+  async getUserData(data?: RequestConfig) {
+    return $api.get<UserType>('users/me', data?.config)
   }
 
   // TODO request config
