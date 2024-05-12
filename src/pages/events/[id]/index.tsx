@@ -22,7 +22,7 @@ export async function getStaticPaths() {
         status: "OPEN",
       },
     });
-    const paths = events.data.map((event) => ({
+    const paths = events.data.content.map((event) => ({
       params: { id: `${event.id}` },
     }));
     return { paths, fallback: "blocking" };
