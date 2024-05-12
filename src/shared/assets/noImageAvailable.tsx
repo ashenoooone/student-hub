@@ -4,6 +4,7 @@ import { cn } from "../utils";
 type NoImageAvailableProps = {
   className?: string;
 };
+// TODO сделать чтобы была оптимизированна
 
 export const NoImageAvailable = (props: NoImageAvailableProps) => {
   const { className } = props;
