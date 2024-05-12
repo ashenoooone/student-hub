@@ -18,7 +18,10 @@ type MembersListProps = {
 };
 
 export const MembersList = React.memo((props: MembersListProps) => {
-  const { className, members, totalMembers } = props;
+  const {
+    className, members, totalMembers
+  }
+    = props;
   return (
     <div className={cn("flex", className)}>
       {members.map((m) => {
@@ -26,6 +29,7 @@ export const MembersList = React.memo((props: MembersListProps) => {
           <Avatar
             className="border-2 border-white [&:not(:first-child)]:-ml-3 cursor-pointer"
             title={m.name}
+            link={m.link}
             key={m.link}
           >
             {m.avatar ? (

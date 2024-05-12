@@ -33,9 +33,8 @@ export class UsersService {
     return $api.get<UserType>('users/me', data?.config)
   }
 
-  // TODO request config
-  async getUserById(id: number | string) {
-    return $api.get<UserType>(`users/${id}`)
+  async getUserById(id: number | string, data?: RequestConfig) {
+    return $api.get<UserType>(`users/${id}`, data?.config)
   }
 
   static instance = new UsersService();
