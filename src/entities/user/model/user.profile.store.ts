@@ -4,6 +4,8 @@ import Cookies from "js-cookie";
 import { createSelectors } from "@/shared/utils";
 import { persist, createJSONStorage } from "zustand/middleware";
 type ProfileStateType = {
+  _hydrated: boolean;
+  _setHasHydrated: (hydrated: boolean) => void;
   profile: UserType | null;
   setProfile: (profile: UserType) => void;
 };
@@ -13,6 +15,9 @@ export const COOKIE_PROFILE = "cookie_profile";
 const store = createStore<ProfileStateType>()(
   persist(
     (set) => ({
+      _hydrated: false,
+      _setHasHydrated: (hydrated) =>
+        set((state) => ({ ...state, _hydrated: hydrated })),
       profile: Cookies.get(COOKIE_PROFILE)
         ? (JSON.parse(Cookies.get(COOKIE_PROFILE)!) as UserType)
         : null,
@@ -25,6 +30,9 @@ const store = createStore<ProfileStateType>()(
     {
       name: COOKIE_PROFILE,
       storage: createJSONStorage(() => localStorage),
+      onRehydrateStorage: () => (state) => {
+        state?._setHasHydrated(true);
+      },
     }
   )
 );

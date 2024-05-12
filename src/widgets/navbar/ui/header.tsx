@@ -1,4 +1,4 @@
-import { COOKIE_PROFILE, useUserProfileStore } from "@/entities/user";
+import { useUserProfileStore } from "@/entities/user";
 import { ROUTES } from "@/shared/conts";
 import { Box } from "@/shared/ui/box";
 import { Button } from "@/shared/ui/button";
@@ -6,13 +6,17 @@ import { Typography } from "@/shared/ui/typography";
 import { cn, isActiveLink } from "@/shared/utils";
 import { Avatar, AvatarFallback } from "@/shared/ui/avatar";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { UserType } from "@/entities/user/model/types";
 type HeaderProps = {
   className?: string;
 };
 
 export const Header = React.memo((props: HeaderProps) => {
   const { className } = props;
+  const [profile, setProfile] = useState<UserType | null>(null);
+  const userProfile = useUserProfileStore.use.profile();
+  const userProfileHydrated = useUserProfileStore.use._hydrated();
 
   return (
     <Box
@@ -51,7 +55,17 @@ export const Header = React.memo((props: HeaderProps) => {
             Проекты
           </Button>
         </Link>
-        {/* TODO вызывает ошибку гидратации исправить */}
+        {userProfileHydrated && userProfile ? (
+          <Link href={ROUTES.profile}>
+            <Avatar>
+              <AvatarFallback>{userProfile?.login.slice(0, 2)}</AvatarFallback>
+            </Avatar>
+          </Link>
+        ) : (
+          <Link href={ROUTES.login}>
+            <Button variant="link">Войти</Button>
+          </Link>
+        )}
       </div>
     </Box>
   );
