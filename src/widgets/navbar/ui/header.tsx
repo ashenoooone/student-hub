@@ -6,15 +6,51 @@ import { Typography } from "@/shared/ui/typography";
 import { cn, isActiveLink } from "@/shared/utils";
 import { Avatar, AvatarFallback } from "@/shared/ui/avatar";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { UserType } from "@/entities/user/model/types";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/shared/ui/dropdown-menu";
+import { ArchiveIcon, ExitIcon, HomeIcon } from "@radix-ui/react-icons";
 type HeaderProps = {
   className?: string;
 };
 
+const UserAvatar = (props: UserType & { className?: string }) => {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger>
+        <Avatar>
+          <AvatarFallback>{props?.login.slice(0, 2)}</AvatarFallback>
+        </Avatar>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className={props.className}>
+        <DropdownMenuLabel>Мой аккаунт</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem className="flex items-center gap-2">
+          <HomeIcon className="w-4 h-4" />
+          <Link href={ROUTES.profile}>Профиль</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem className="flex items-center gap-2">
+          <ArchiveIcon className="w-4 h-4" />
+          <Link href={ROUTES.projects}>Мои проекты</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem className="flex items-center gap-2">
+          <ExitIcon className="w-4 h-4" />
+          <Link href={ROUTES.logout}>Выйти</Link>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
+
 export const Header = React.memo((props: HeaderProps) => {
   const { className } = props;
-  const [profile, setProfile] = useState<UserType | null>(null);
   const userProfile = useUserProfileStore.use.profile();
   const userProfileHydrated = useUserProfileStore.use._hydrated();
 
@@ -56,11 +92,7 @@ export const Header = React.memo((props: HeaderProps) => {
           </Button>
         </Link>
         {userProfileHydrated && userProfile ? (
-          <Link href={ROUTES.profile}>
-            <Avatar>
-              <AvatarFallback>{userProfile?.login.slice(0, 2)}</AvatarFallback>
-            </Avatar>
-          </Link>
+          <UserAvatar className="mr-2" {...userProfile} />
         ) : (
           <Link href={ROUTES.login}>
             <Button variant="link">Войти</Button>
