@@ -3,6 +3,7 @@ import {
   EventStatus,
   EventType,
   GetAllEventsRequestConfig,
+  GetAllEventsResponse,
   GetEventByIdRequestConfig,
 } from "@/entities/events/model/types";
 import { createInflate } from "zlib";
@@ -62,7 +63,7 @@ export class EventsService {
       url += "&status=ALL";
     }
 
-    return $api.get<EventType[]>(url, config?.config);
+    return $api.get<GetAllEventsResponse>(url, config?.config);
   }
 
   static instance = new EventsService();
