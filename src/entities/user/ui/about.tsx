@@ -101,7 +101,7 @@ export const AboutUser = React.memo((props: AboutUserProps) => {
         />
       ) : (
         <Typography
-          className={"w-max flex gap-3 items-center mt-4"}
+          className={"flex gap-3 items-center mt-4 break-words"}
           affects={"muted"}
         >
           {aboutText}
