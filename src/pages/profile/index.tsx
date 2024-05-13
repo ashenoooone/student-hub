@@ -11,16 +11,13 @@ import {
   ProjectList,
 } from "@/pages-composite/profile-page";
 import { EventType } from "@/entities/events/model/types";
-import Link from "next/link";
-import { Button } from "@/shared/ui/button";
-import { ROUTES } from "@/shared/conts";
-import { Box } from "@/shared/ui/box";
-import { Typography } from "@/shared/ui/typography";
 
 type Props = {
   profile: UserType;
   project: ProjectType[];
   events: EventType[];
+  totalProjects: number;
+  totalEvents: number;
 };
 
 export const getServerSideProps = (async (context) => {
@@ -44,12 +41,10 @@ export const getServerSideProps = (async (context) => {
   const [profile, projects, events] = await Promise.all([
     UsersService.instance.getUserData(authConfig),
     // TODO сделать получение проектов юзера
-    ProjectService.instance.getAll({
-      config: {
-        ...authConfig.config,
-        params: {
-          page: 1,
-        },
+    UsersService.instance.getUserProjects({
+      params: {
+        id: user.id,
+        limit: 3,
       },
     }),
     // TODO сделать получение ивентов юзера
@@ -66,12 +61,19 @@ export const getServerSideProps = (async (context) => {
       profile: profile.data,
       project: projects.data.content,
       events: events.data.content,
+      totalProjects: projects.data.totalItems,
+      totalEvents: events.data.totalItems,
     },
   };
 }) satisfies GetServerSideProps<Props>;
 
-const Profile: FC<Props> = ({ profile, project, events }) => {
-  console.log(profile, project, events);
+const Profile: FC<Props> = ({
+  profile,
+  project,
+  events,
+  totalProjects,
+  totalEvents,
+}) => {
   return (
     <Page>
       <ProfileHeader profile={profile} />
@@ -80,24 +82,8 @@ const Profile: FC<Props> = ({ profile, project, events }) => {
           <Info profile={profile} />
         </div>
         <div className={"w-3/4 flex flex-col gap-4"}>
-          <Box className="flex flex-col items-center">
-            {project.length > 0 ? (
-              <>
-                <ProjectList projects={project} />
-                <Link
-                  href={ROUTES.projects}
-                  className="mt-4 inline-block mx-auto"
-                >
-                  <Button variant={"outline"}>Смотреть все проекты</Button>
-                </Link>
-              </>
-            ) : (
-              <Typography affects={"muted"}>
-                Список проектов пока пуст 😔
-              </Typography>
-            )}
-          </Box>
-          <Events events={events} />
+          <ProjectList totalProjects={totalProjects} projects={project} />
+          <Events totalEvents={totalEvents} events={events} />
         </div>
       </div>
     </Page>

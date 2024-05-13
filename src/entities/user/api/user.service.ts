@@ -2,6 +2,8 @@ import { $api } from "@/shared/api";
 import {
   GetUserEventsRequestConfig,
   GetUserEventsResponse,
+  GetUserProjectsRequestConfig,
+  GetUserProjectsResponse,
   PostLoginUserRequestConfig,
   PostRefreshUserParams,
   PostRegisterUserParams,
@@ -41,8 +43,17 @@ export class UsersService {
   }
 
   async getUserEvents(data?: GetUserEventsRequestConfig) {
+    // TODO добавить возможность пагинации ? квери парамсы передавать
     return $api.get<GetUserEventsResponse>(
       `users/${data?.params.id}/events`,
+      data?.config
+    );
+  }
+
+  async getUserProjects(data?: GetUserProjectsRequestConfig) {
+    // TODO добавить возможность пагинации ? квери парамсы передавать
+    return $api.get<GetUserProjectsResponse>(
+      `users/${data?.params.id}/projects`,
       data?.config
     );
   }

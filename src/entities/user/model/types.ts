@@ -1,4 +1,7 @@
 import { EventType } from "@/entities/events/model/types";
+import { ProjectType } from "@/entities/project";
+import { WithPagination } from "@/shared/types";
+import { Project } from "next/dist/build/swc";
 
 export type TokensResponseType = {
   type: string;
@@ -46,11 +49,16 @@ export type GetUserEventsParams = {
   page?: number;
 };
 
-export type GetUserEventsResponse = {
-  page: number;
-  size: number;
-  totalPages: number;
-  content: EventType[];
-};
+export type GetUserEventsResponse = WithPagination<EventType[]>;
 
 export type GetUserEventsRequestConfig = RequestConfig<GetUserEventsParams>;
+
+export type GetUserProjectsParams = {
+  id: number;
+  limit?: number;
+  page?: number;
+};
+
+export type GetUserProjectsResponse = WithPagination<ProjectType[]>;
+
+export type GetUserProjectsRequestConfig = RequestConfig<GetUserProjectsParams>;
