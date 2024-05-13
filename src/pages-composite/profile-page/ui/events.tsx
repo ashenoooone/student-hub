@@ -5,9 +5,11 @@ import { EventType } from "@/entities/events/model/types";
 import { EventsList } from "@/entities/events";
 import { ROUTES } from "@/shared/conts";
 import Link from "next/link";
+import { Button } from "@/shared/ui/button";
 
 type EventsProps = {
   events: EventType[];
+  totalEvents: number;
 };
 
 export const Events: FC<EventsProps> = ({ events }) => {
@@ -17,15 +19,18 @@ export const Events: FC<EventsProps> = ({ events }) => {
         Мероприятия
       </Typography>
       {events.length > 0 ? (
-        <EventsList events={events} />
+        <>
+          <EventsList events={events} />
+        </>
       ) : (
-        <Typography affects={"muted"}>
+        <Typography
+          affects={"muted"}
+          className="text-center flex flex-col items-center"
+        >
           Вы пока не записались ни на одно мероприятие 😖
           <Link className="w-max" href={ROUTES.events}>
             {/* TODO ИСПРАВИТЬ ПОТОМ */}
-            <Typography affects={"link"} className="w-max">
-              Посмотреть список мероприятий
-            </Typography>
+            <Button variant={"link"}>Посмотреть список мероприятий</Button>
           </Link>
         </Typography>
       )}
