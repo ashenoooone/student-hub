@@ -38,6 +38,21 @@ export type UserMediaType = {
   about: string;
 };
 
+export type UserRatingType =
+  | "creativity"
+  | "learningAbility"
+  | "politeness"
+  | "responsibility";
+
+export const UserRatingMapper: Record<UserRatingType, string> = {
+  creativity: "Креативность",
+  learningAbility: "Обучаемость",
+  politeness: "Ответственность",
+  responsibility: "Вежливость",
+};
+
+export type UserRatingsType = Record<UserRatingType, number>;
+
 export type UserType = {
   id: number;
   userId: number;
@@ -50,6 +65,7 @@ export type UserType = {
   lastName: string;
   middleName: string;
   media?: UserMediaType;
+  ratings: UserRatingsType;
 };
 
 export type GetUserEventsParams = {

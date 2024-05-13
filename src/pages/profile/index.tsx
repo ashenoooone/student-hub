@@ -11,6 +11,7 @@ import {
   ProjectList,
 } from "@/pages-composite/profile-page";
 import { EventType } from "@/entities/events/model/types";
+import { ProfileCompliments } from "@/pages-composite/profile-page/ui/profile-compliments";
 
 type Props = {
   profile: UserType;
@@ -89,6 +90,7 @@ const Profile: FC<Props> = ({
         <div className={"w-1/4 flex flex-col gap-4"}>
           <Info userMedia={profile.media} />
           <AboutUser about={profile.media} />
+          <ProfileCompliments profile={profile} />
         </div>
         <div className={"w-3/4 flex flex-col gap-4"}>
           <ProjectList totalProjects={totalProjects} projects={project} />
