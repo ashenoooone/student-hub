@@ -38,35 +38,41 @@ export const getServerSideProps = (async (context) => {
     },
   };
 
-  const [profile, projects, events] = await Promise.all([
-    UsersService.instance.getUserData(authConfig),
-    // TODO сделать получение проектов юзера
-    UsersService.instance.getUserProjects({
-      params: {
-        id: user.id,
-        limit: 3,
-      },
-    }),
-    // TODO сделать получение ивентов юзера
-    UsersService.instance.getUserEvents({
-      params: {
-        id: user.id,
-        limit: 3,
-      },
-    }),
-  ]);
+  try {
+    const [profile, projects, events] = await Promise.all([
+      UsersService.instance.getUserData(authConfig),
+      UsersService.instance.getUserProjects({
+        params: {
+          id: user.id,
+          limit: 3,
+        },
+      }),
+      UsersService.instance.getUserEvents({
+        params: {
+          id: user.id,
+          limit: 3,
+        },
+      }),
+    ]);
 
-  console.log(projects.request);
-
-  return {
-    props: {
-      profile: profile.data,
-      project: projects.data.content,
-      events: events.data.content,
-      totalProjects: projects.data.totalItems,
-      totalEvents: events.data.totalItems,
-    },
-  };
+    return {
+      props: {
+        profile: profile.data,
+        project: projects.data.content,
+        events: events.data.content,
+        totalProjects: projects.data.totalItems,
+        totalEvents: events.data.totalItems,
+      },
+    };
+  } catch (e) {
+    console.log(e);
+    return {
+      redirect: {
+        destination: "500",
+      },
+    };
+  }
+  // @ts-ignore
 }) satisfies GetServerSideProps<Props>;
 
 const Profile: FC<Props> = ({
