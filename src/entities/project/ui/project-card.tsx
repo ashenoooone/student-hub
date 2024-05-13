@@ -1,36 +1,55 @@
-import {FC, useMemo} from "react";
-import {ProjectType} from "@/entities/project";
-import {Typography} from "@/shared/ui/typography";
-import {Button} from "@/shared/ui/button";
-import {Member, MembersList} from "@/shared/ui/members";
+import { FC, useMemo } from "react";
+import { ProjectType } from "@/entities/project";
+import { Typography } from "@/shared/ui/typography";
+import { Button } from "@/shared/ui/button";
+import { Member, MembersList } from "@/shared/ui/members";
 import Link from "next/link";
-import {ROUTES} from "@/shared/conts";
-import {Box} from "@/shared/ui/box";
-
+import { ROUTES } from "@/shared/conts";
+import { Box } from "@/shared/ui/box";
+import { Avatar, AvatarFallback } from "@/shared/ui/avatar";
+import Image from "next/image";
 
 type ProjectCardProps = {
   project: ProjectType;
-}
+};
 
-export const ProjectCard: FC<ProjectCardProps> = ({project}) => {
-
-  const members: Member[] = useMemo(() => project.members.map(user => ({
-    id: user.id,
-    name: user.login,
-    link: `/profile/${user.id}`,
-    avatar: user.avatar ?? ''
-  })), [project.members])
+export const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
+  const members: Member[] = useMemo(
+    () =>
+      project.members?.map((user) => ({
+        id: user.id,
+        name: user.login,
+        link: `/profile/${user.id}`,
+        avatar: user.avatar ?? "",
+      })),
+    [project.members]
+  );
 
   return (
-    <Box variant={'blue'} className={'flex flex-col'}>
-      <Typography className={'text-[#9398a8]'}>#{project.id}</Typography>
-      <Typography affects={'large'}>{project.name}</Typography>
-      <Typography className={'mb-3'}>{project.description}</Typography>
-      <div className={'flex justify-between'}>
-        <Link href={`${ROUTES.projects}/${project.id}`}>
-          <Button className={'text-primary'} variant={'outline'}>Смотреть профиль проекта</Button>
+    <Box className={"flex [&:not(:last-child)]:border-b gap-5"}>
+      <Avatar className="w-20 h-20">
+        {project.avatar && <Image src={project.avatar} alt={project.name} />}
+        <AvatarFallback>{project.name.slice(0, 2)}</AvatarFallback>
+      </Avatar>
+      <div className="flex flex-col w-full">
+        <Link
+          href={`${ROUTES.projects}/${project.id}`}
+          className="text-primary w-max"
+        >
+          <Typography className="text-lg font-bold" affects={"link"}>
+            {project.name}
+          </Typography>
         </Link>
-        <MembersList members={members} totalMembers={project.members.length}/>
+        <Typography affects={"muted"} className={"mb-3"}>
+          {project.description}
+        </Typography>
+        {project.members && (
+          <MembersList
+            className="ml-auto"
+            members={members}
+            totalMembers={project.members.length}
+          />
+        )}
       </div>
     </Box>
   );
