@@ -113,7 +113,7 @@ export const AboutUser = React.memo((props: AboutUserProps) => {
           className={"flex gap-3 items-center mt-4 break-words"}
           affects={"muted"}
         >
-          {aboutText}
+          {aboutText && aboutText.length > 0 ? aboutText : "Пусто 🕵️‍♂️"}
         </Typography>
       )}
     </Box>
