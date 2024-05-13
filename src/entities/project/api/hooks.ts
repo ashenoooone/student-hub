@@ -1,17 +1,21 @@
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
-import {CommentParamsType, ProjectService} from "@/entities/project";
+import {CommentParamsType, ProjectQueryParamsTypes, ProjectService} from "@/entities/project";
 
 const PROJECTS_KEY = 'projects'
 const PROJECTS_COMMENTS_KEY = 'projects-comments'
 const COMMENT_KEY = 'comment';
 
-export const useProjects = ({page = 1}: { page: number }) => useQuery({
-  queryKey: [PROJECTS_KEY, page],
+const DEFAULT_FILTER_CONFIG: ProjectQueryParamsTypes['filter'] = {
+  page: 1,
+  limit: 5
+}
+
+
+export const useProjects = ({filter = DEFAULT_FILTER_CONFIG}: ProjectQueryParamsTypes) => useQuery({
+  queryKey: [PROJECTS_KEY, ...Object.entries(filter)],
   queryFn: () => ProjectService.instance.getAll({
     config: {
-      params: {
-        page
-      }
+      params: filter
     }
   }),
   select: ({data}) => data
@@ -29,7 +33,6 @@ export const useComments = (projectId: string | number, page: number) => useQuer
   }),
   select: ({data}) => data,
 })
-
 
 export const useCommentSendMutation = (settings?: MutationSettings<
   CommentParamsType,
