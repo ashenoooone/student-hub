@@ -40,6 +40,7 @@ export type UserMediaType = {
 
 export type UserType = {
   id: number;
+  userId: number;
   login: string;
   email: string;
   roles: string[];

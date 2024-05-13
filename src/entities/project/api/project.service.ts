@@ -6,7 +6,7 @@ export class ProjectService {
   }
 
   async getAll(data?: RequestConfig) {
-    return $api.get<ProjectType[]>('projects/all', data?.config);
+    return $api.get<PaginationType<ProjectType[]>>('projects/all', data?.config);
   }
 
   async getById(id: number, data?: RequestConfig) {
