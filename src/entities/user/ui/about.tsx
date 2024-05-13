@@ -4,7 +4,11 @@ import { UserMediaType } from "../model/types";
 import { Box } from "@/shared/ui/box";
 import { Typography } from "@/shared/ui/typography";
 import { Button } from "@/shared/ui/button";
-import { Pencil2Icon } from "@radix-ui/react-icons";
+import {
+  CheckCircledIcon,
+  CrossCircledIcon,
+  Pencil2Icon,
+} from "@radix-ui/react-icons";
 import { Textarea } from "@/shared/ui/textarea";
 import { usePutUserAboutMutation } from "../api";
 import { useToast } from "@/shared/ui/use-toast";
@@ -73,13 +77,18 @@ export const AboutUser = React.memo((props: AboutUserProps) => {
             <Button
               onClick={onCancelClick}
               size={"sm"}
-              variant={"destructive"}
-              className="mr-2"
+              variant={"ghost"}
+              className="mr-2 hover:text-red-700"
             >
-              Отменить
+              <CrossCircledIcon className="w-5 h-5" />
             </Button>
-            <Button onClick={onSaveNewAboutMe} size="sm">
-              Сохранить
+            <Button
+              variant={"ghost"}
+              className="hover:text-green-700"
+              onClick={onSaveNewAboutMe}
+              size="sm"
+            >
+              <CheckCircledIcon className="w-5 h-5" />
             </Button>
           </div>
         ) : (

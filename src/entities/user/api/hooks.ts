@@ -3,6 +3,7 @@ import { UsersService } from "../api";
 import {
   PostLoginUserRequestConfig,
   PutUserAboutRequestConfig,
+  PutUserMediaRequestConfig,
 } from "../model/types";
 
 export const usePostLoginUserMutation = (
@@ -31,6 +32,22 @@ export const usePutUserAboutMutation = (
     mutationKey: ["usePutUserAboutMutation"],
     mutationFn: ({ params, config }) =>
       UsersService.instance.putUserAbout({
+        params,
+        config: { ...settings?.config, ...config },
+      }),
+    ...settings?.options,
+  });
+
+export const usePutUserMediaMutation = (
+  settings?: MutationSettings<
+    PutUserMediaRequestConfig,
+    typeof UsersService.instance.putUserMedia
+  >
+) =>
+  useMutation({
+    mutationKey: ["usePutUserMediaMutation"],
+    mutationFn: ({ params, config }) =>
+      UsersService.instance.putUserMedia({
         params,
         config: { ...settings?.config, ...config },
       }),

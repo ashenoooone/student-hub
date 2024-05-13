@@ -77,3 +77,7 @@ export type PutUserAboutParams = {
 };
 
 export type PutUserAboutRequestConfig = RequestConfig<PutUserAboutParams>;
+
+export type PutUserMediaParams = Omit<UserMediaType, "about">;
+
+export type PutUserMediaRequestConfig = RequestConfig<PutUserMediaParams>;

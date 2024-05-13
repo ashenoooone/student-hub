@@ -8,6 +8,7 @@ import {
   PostRefreshUserParams,
   PostRegisterUserParams,
   PutUserAboutRequestConfig,
+  PutUserMediaRequestConfig,
   TokensResponseType,
   UserType,
 } from "../model/types";
@@ -58,7 +59,6 @@ export class UsersService {
       url += "&limit=25";
     }
 
-    // TODO добавить возможность пагинации ? квери парамсы передавать
     return $api.get<GetUserEventsResponse>(url, data?.config);
   }
 
@@ -76,13 +76,15 @@ export class UsersService {
       url += "&limit=3";
     }
     console.log(url);
-    // TODO добавить возможность пагинации ? квери парамсы передавать
     return $api.get<GetUserProjectsResponse>(url, data?.config);
   }
 
   async putUserAbout(data: PutUserAboutRequestConfig) {
-    // TODO добавить возможность пагинации ? квери парамсы передавать
     return $api.put(`users/about`, data.params, data?.config);
+  }
+
+  async putUserMedia(data: PutUserMediaRequestConfig) {
+    return $api.put(`users/media`, data.params, data.config);
   }
 
   static instance = new UsersService();
