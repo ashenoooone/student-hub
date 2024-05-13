@@ -10,9 +10,7 @@ import {
   ProfileHeader,
   ProjectList,
 } from "@/pages-composite/profile-page";
-import { EventsService } from "@/entities/events";
 import { EventType } from "@/entities/events/model/types";
-import { log } from "console";
 import Link from "next/link";
 import { Button } from "@/shared/ui/button";
 import { ROUTES } from "@/shared/conts";
@@ -26,11 +24,14 @@ type Props = {
 };
 
 export const getServerSideProps = (async (context) => {
-  if (!context.req.cookies.cookie_user) return { notFound: true };
+  if (!context.req.cookies.cookie_user || !context.req.cookies.cookie_profile)
+    return { notFound: true };
 
   const token = JSON.parse(
     context.req.cookies.cookie_user
   ) as TokensResponseType;
+
+  const user = JSON.parse(context.req.cookies.cookie_profile) as UserType;
 
   const authConfig = {
     config: {
@@ -52,9 +53,10 @@ export const getServerSideProps = (async (context) => {
       },
     }),
     // TODO сделать получение ивентов юзера
-    EventsService.instance.getAll({
+    UsersService.instance.getUserEvents({
       params: {
-        limit: 4,
+        id: user.id,
+        limit: 3,
       },
     }),
   ]);

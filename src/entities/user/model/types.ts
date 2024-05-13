@@ -1,3 +1,5 @@
+import { EventType } from "@/entities/events/model/types";
+
 export type TokensResponseType = {
   type: string;
   accessToken: string;
@@ -35,4 +37,19 @@ export type UserType = {
   firstName: string;
   lastName: string;
   middleName: string;
-}
+};
+
+export type GetUserEventsParams = {
+  id: number;
+  limit?: number;
+  page?: number;
+};
+
+export type GetUserEventsResponse = {
+  page: number;
+  size: number;
+  totalPages: number;
+  content: EventType[];
+};
+
+export type GetUserEventsRequestConfig = RequestConfig<GetUserEventsParams>;
