@@ -12,7 +12,6 @@ import {
   ProjectList,
 } from "@/pages-composite/profile-page";
 import React, { FC } from "react";
-import { threadId } from "worker_threads";
 import { ROUTES } from "@/shared/conts";
 
 type Props = {
@@ -27,7 +26,7 @@ const Profile: FC<Props> = ({ profile, project, events }) => {
       <ProfileHeader profile={profile} />
       <div className={"flex flex-row gap-4 pt-5 w-full"}>
         <div className={"w-1/4 flex flex-col gap-4"}>
-          <Info profile={profile} />
+          <Info user={profile} />
         </div>
         <div className={"w-3/4 flex flex-col gap-4"}>
           <ProjectList projects={[project]} />
