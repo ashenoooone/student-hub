@@ -7,9 +7,26 @@ export type ProjectType = {
   avatar: string;
   name: string;
   description: string;
+  leader: UserType;
   status: string;
   event: EventType;
   members: UserType[];
   actualRoles: RoleType[]
   createDate: string;
 }
+
+export type CommentType = {
+  id: number,
+  author: {
+    id: number,
+    login: string,
+    email: string,
+    avatar: string
+  },
+  text: string,
+  createDate: string
+}
+
+export type CommentParamsType = {
+  projectId: number;
+} & Pick<CommentType, 'text' | 'createDate'>

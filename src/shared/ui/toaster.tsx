@@ -1,12 +1,5 @@
-import {
-  Toast,
-  ToastClose,
-  ToastDescription,
-  ToastProvider,
-  ToastTitle,
-  ToastViewport,
-} from "@/shared//ui/toast"
-import { useToast } from "@/shared//ui/use-toast"
+import {Toast, ToastClose, ToastDescription, ToastProvider, ToastTitle, ToastViewport,} from "@/shared//ui/toast"
+import {useToast} from "@/shared//ui/use-toast"
 
 export function Toaster() {
   const { toasts } = useToast()
