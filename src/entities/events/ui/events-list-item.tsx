@@ -17,7 +17,6 @@ type EventsListItemProps = {
 
 export const EventsListItem = React.memo((props: EventsListItemProps) => {
   const { className, event } = props;
-  const router = useRouter();
 
   return (
     <Box className="hover:scale-[101%] transition-all cursor-pointer">
@@ -27,7 +26,13 @@ export const EventsListItem = React.memo((props: EventsListItemProps) => {
         target="_blank"
       >
         {event.avatar ? (
-          <Image alt={event.name} src={event.avatar} />
+          <Image
+            width={1000}
+            height={1000}
+            alt={event.name}
+            src={event.avatar}
+            className="h-[140px] object-fit"
+          />
         ) : (
           <NoImageAvailable className="w-full h-[140px]" />
         )}

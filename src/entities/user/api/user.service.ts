@@ -7,6 +7,7 @@ import {
   PostLoginUserRequestConfig,
   PostRefreshUserParams,
   PostRegisterUserParams,
+  PutUserAboutRequestConfig,
   TokensResponseType,
   UserType,
 } from "../model/types";
@@ -43,19 +44,45 @@ export class UsersService {
   }
 
   async getUserEvents(data?: GetUserEventsRequestConfig) {
+    let url = `users/${data?.params.id}/events`;
+
+    if (data?.params.page) {
+      url += "?page=" + data?.params.page;
+    } else {
+      url += "?page=1";
+    }
+
+    if (data?.params.limit) {
+      url += "&limit=" + data?.params.limit;
+    } else {
+      url += "&limit=25";
+    }
+
     // TODO добавить возможность пагинации ? квери парамсы передавать
-    return $api.get<GetUserEventsResponse>(
-      `users/${data?.params.id}/events`,
-      data?.config
-    );
+    return $api.get<GetUserEventsResponse>(url, data?.config);
   }
 
   async getUserProjects(data?: GetUserProjectsRequestConfig) {
+    let url = `users/${data?.params.id}/projects`;
+    if (data?.params.page) {
+      url += "?page=" + data?.params.page;
+    } else {
+      url += "?page=1";
+    }
+
+    if (data?.params.limit) {
+      url += "&limit=" + data?.params.limit;
+    } else {
+      url += "&limit=3";
+    }
+    console.log(url);
     // TODO добавить возможность пагинации ? квери парамсы передавать
-    return $api.get<GetUserProjectsResponse>(
-      `users/${data?.params.id}/projects`,
-      data?.config
-    );
+    return $api.get<GetUserProjectsResponse>(url, data?.config);
+  }
+
+  async putUserAbout(data: PutUserAboutRequestConfig) {
+    // TODO добавить возможность пагинации ? квери парамсы передавать
+    return $api.put(`users/about`, data.params, data?.config);
   }
 
   static instance = new UsersService();

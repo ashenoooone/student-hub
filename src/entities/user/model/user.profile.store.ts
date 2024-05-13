@@ -5,6 +5,7 @@ import { createSelectors } from "@/shared/utils";
 import { immer } from "zustand/middleware/immer";
 
 import { persist, createJSONStorage } from "zustand/middleware";
+import { cookies } from "next/headers";
 type ProfileStateType = {
   _hydrated: boolean;
   _setHasHydrated: (hydrated: boolean) => void;
@@ -26,6 +27,7 @@ const store = createStore<ProfileStateType>()(
         : null,
       setProfile: (profile) =>
         set((state) => {
+          Cookies.set(COOKIE_PROFILE, JSON.stringify(profile));
           return { ...state, profile };
         }),
       removeProfile: () =>
@@ -35,6 +37,7 @@ const store = createStore<ProfileStateType>()(
     })),
     {
       name: COOKIE_PROFILE,
+      // TODO сделать куки стор
       storage: createJSONStorage(() => localStorage),
       onRehydrateStorage: () => (state) => {
         state?._setHasHydrated(true);

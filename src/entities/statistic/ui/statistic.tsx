@@ -17,17 +17,32 @@ export const Statistic = React.memo((props: StatisticProps) => {
         <StatisticItem
           className="bg-gradient-to-r from-slate-300/90 to-slate-500/90"
           icon={"👨‍🎓"}
-          text={`пользователей в системе - ${statistic.statisticPeople.countPeople}`}
+          text={
+            <>
+              пользователей в системе&nbsp;-&nbsp;
+              {statistic.statisticPeople.countPeople}
+            </>
+          }
         />
         <StatisticItem
           className="bg-gradient-to-r from-slate-900/90 to-slate-700/90"
           icon={"🛠️"}
-          text={`проектов создано за все время - ${statistic.statisticProject.countAllProject}`}
+          text={
+            <>
+              проектов создано за все время&nbsp;-&nbsp;
+              {statistic.statisticProject.countAllProject}
+            </>
+          }
         />
         <StatisticItem
           className="bg-gradient-to-r from-cyan-500/90 to-blue-500/90"
           icon={"📊"}
-          text={`создано проектов сегодня - ${statistic.statisticProject.countAllProjectToday}`}
+          text={
+            <>
+              создано проектов сегодня&nbsp;-&nbsp;
+              {statistic.statisticProject.countAllProjectToday}
+            </>
+          }
         />
         <StatisticItem
           className="bg-gradient-to-r from-rose-400/90 to-red-500/90"
