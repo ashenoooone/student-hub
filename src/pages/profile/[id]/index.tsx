@@ -13,6 +13,7 @@ import {
 } from "@/pages-composite/profile-page";
 import React, { FC } from "react";
 import { threadId } from "worker_threads";
+import { ROUTES } from "@/shared/conts";
 
 type Props = {
   profile: UserType;
@@ -39,6 +40,18 @@ const Profile: FC<Props> = ({ profile, project, events }) => {
 
 export const getServerSideProps = (async (context) => {
   const { id } = context.params as { id: string | number };
+  if (context.req.cookies.cookie_profile) {
+    const userProfile = JSON.parse(
+      context.req.cookies.cookie_profile
+    ) as UserType;
+    if (userProfile && userProfile.id === +id) {
+      return {
+        redirect: {
+          destination: ROUTES.profile,
+        },
+      };
+    }
+  }
 
   if (!id || !context.req.cookies.cookie_user) {
     return {

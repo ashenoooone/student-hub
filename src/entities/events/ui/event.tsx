@@ -65,8 +65,10 @@ export const Event = React.memo((props: EventProps) => {
       <div>
         {event.avatar ? (
           <Image
+            width={1000}
+            height={1000}
             alt={event.name}
-            className="h-[240px] w-[240px] object-cover rounded-md"
+            className="h-[240px] w-[340px] object-fit rounded-md"
             src={event.avatar}
           />
         ) : (
