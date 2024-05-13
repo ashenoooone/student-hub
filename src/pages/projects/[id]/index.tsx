@@ -81,7 +81,7 @@ const Projects: FC<Props> = ({project}) => {
       </Box>
       {project.actualRoles.length > 0 && <Box>
           <Typography variant={'h2'}>Свободные места</Typography>
-        {project.actualRoles.map((role) => (<div key={role.id}>{role.name}</div>))}
+        {project.actualRoles.map((role) => (<Typography affects={'lead'} key={role.id}>{role.name}</Typography>))}
       </Box>}
     </Page>
   );
