@@ -29,7 +29,7 @@ const Profile: FC<Props> = ({ profile, project, events }) => {
           <Info profile={profile} />
         </div>
         <div className={"w-3/4 flex flex-col gap-4"}>
-          <ProjectList projects={project} />
+          <ProjectList projects={[project]} />
           <Events events={events} />
         </div>
       </div>
@@ -72,7 +72,7 @@ export const getServerSideProps = (async (context) => {
     return {
       props: {
         profile: profile.data,
-        project: projects.data[0],
+        project: projects.data.content[0],
         events: events.data.content.slice(0, 4),
       },
     };

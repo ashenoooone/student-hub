@@ -64,7 +64,7 @@ export const getServerSideProps = (async (context) => {
   return {
     props: {
       profile: profile.data,
-      project: projects.data,
+      project: projects.data.content,
       events: events.data.content,
     },
   };
