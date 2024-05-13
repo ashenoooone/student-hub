@@ -15,7 +15,7 @@ export const ProjectTableCard: FC<ProjectTableCardProps> = ({project}) => {
     <div key={project.id} className={'flex flex-col gap-3'}>
       <Avatar className={'w-full !rounded-[12px] min-h-[240px] cursor-pointer'}
               link={`${ROUTES.projects}/${project.id}`}>
-        {project.avatar ? <Image className={'!rounded-[12px]'} src={project.avatar} alt={project.name}/> :
+        {project.avatar ? <Image className={'!rounded-[12px]'} src={project.avatar} alt={project.name} width={200} height={200}/> :
           <AvatarFallback className={'!rounded-[12px]'}>{project.name}</AvatarFallback>
         }
       </Avatar>

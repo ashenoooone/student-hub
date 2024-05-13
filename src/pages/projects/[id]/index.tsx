@@ -9,7 +9,7 @@ import {Button} from "@/shared/ui/button";
 import Image from "next/image";
 import {Avatar, AvatarFallback} from "@/shared/ui/avatar";
 import {Member, MembersList} from "@/shared/ui/members";
-import {ROUTES} from "@/shared/conts";
+import {PROJECT_STATUS, ROUTES, Status} from "@/shared/conts";
 import {useUserProfileStore} from "@/entities/user";
 import {RequestService} from "@/entities/request";
 import {useToast} from "@/shared/ui/use-toast";
@@ -60,7 +60,7 @@ const Projects: FC<Props> = ({project}) => {
       <Box className={'flex flex-row gap-4'}>
         <div className={'w-1/2 flex flex-col gap-3'}>
           <Typography variant={'h2'}>Проект {project.name}</Typography>
-          <Typography>{project.status}</Typography>
+          <Typography>{PROJECT_STATUS[project.status as Status]}</Typography>
           {!existInTeam &&
               <Button size={'lg'} className={'mt-3 max-w-[238px]'} onClick={handleCreateRequest}>Подать заявку</Button>}
         </div>
