@@ -1,7 +1,7 @@
 import { Page } from "@/shared/ui/page";
 import { GetServerSideProps } from "next";
 import React, { FC } from "react";
-import { UsersService } from "@/entities/user";
+import { AboutUser, UsersService } from "@/entities/user";
 import { TokensResponseType, UserType } from "@/entities/user/model/types";
 import { ProjectService, ProjectType } from "@/entities/project";
 import {
@@ -56,6 +56,8 @@ export const getServerSideProps = (async (context) => {
     }),
   ]);
 
+  console.log(projects.request);
+
   return {
     props: {
       profile: profile.data,
@@ -79,7 +81,8 @@ const Profile: FC<Props> = ({
       <ProfileHeader profile={profile} />
       <div className={"flex flex-row gap-4 pt-5 w-full"}>
         <div className={"w-1/4 flex flex-col gap-4"}>
-          <Info profile={profile} />
+          <Info userMedia={profile.media} />
+          <AboutUser about={profile.media} />
         </div>
         <div className={"w-3/4 flex flex-col gap-4"}>
           <ProjectList totalProjects={totalProjects} projects={project} />

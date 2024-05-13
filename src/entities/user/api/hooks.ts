@@ -1,6 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import { UsersService } from "../api";
-import { PostLoginUserRequestConfig } from "../model/types";
+import {
+  PostLoginUserRequestConfig,
+  PutUserAboutRequestConfig,
+} from "../model/types";
 
 export const usePostLoginUserMutation = (
   settings?: MutationSettings<
@@ -12,6 +15,22 @@ export const usePostLoginUserMutation = (
     mutationKey: ["usePostLoginUserMutation"],
     mutationFn: ({ params, config }) =>
       UsersService.instance.login({
+        params,
+        config: { ...settings?.config, ...config },
+      }),
+    ...settings?.options,
+  });
+
+export const usePutUserAboutMutation = (
+  settings?: MutationSettings<
+    PutUserAboutRequestConfig,
+    typeof UsersService.instance.putUserAbout
+  >
+) =>
+  useMutation({
+    mutationKey: ["usePutUserAboutMutation"],
+    mutationFn: ({ params, config }) =>
+      UsersService.instance.putUserAbout({
         params,
         config: { ...settings?.config, ...config },
       }),

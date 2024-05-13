@@ -8,7 +8,11 @@ const nextConfig = {
     API_URL: api,
   },
   images: {
-    domains: ["pixelbox.ru", "distribution.faceit-cdn.net"],
+    domains: [
+      "pixelbox.ru",
+      "distribution.faceit-cdn.net",
+      "it-hub.s3.us-east-005.backblazeb2.com",
+    ],
   },
 };
 

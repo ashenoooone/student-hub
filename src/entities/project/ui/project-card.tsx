@@ -28,8 +28,18 @@ export const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
   return (
     <Box className={"flex [&:not(:last-child)]:border-b gap-5"}>
       <Avatar className="w-20 h-20">
-        {project.avatar && <Image src={project.avatar} alt={project.name} />}
-        <AvatarFallback>{project.name.slice(0, 2)}</AvatarFallback>
+        {project.avatar && (
+          <Image
+            width={1000}
+            height={1000}
+            src={project.avatar}
+            alt={project.name}
+            className="object-cover"
+          />
+        )}
+        {!project.avatar && (
+          <AvatarFallback>{project.name.slice(0, 2)}</AvatarFallback>
+        )}
       </Avatar>
       <div className="flex flex-col w-full">
         <Link

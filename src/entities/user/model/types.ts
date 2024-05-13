@@ -30,6 +30,14 @@ export type PostLoginUserParams = {
 
 export type PostLoginUserRequestConfig = RequestConfig<PostLoginUserParams>;
 
+export type UserMediaType = {
+  tgUrl: string;
+  vkUrl: string;
+  phone: string;
+  email: string;
+  about: string;
+};
+
 export type UserType = {
   id: number;
   login: string;
@@ -40,6 +48,7 @@ export type UserType = {
   firstName: string;
   lastName: string;
   middleName: string;
+  media?: UserMediaType;
 };
 
 export type GetUserEventsParams = {
@@ -61,3 +70,9 @@ export type GetUserProjectsParams = {
 export type GetUserProjectsResponse = WithPagination<ProjectType[]>;
 
 export type GetUserProjectsRequestConfig = RequestConfig<GetUserProjectsParams>;
+
+export type PutUserAboutParams = {
+  about: string;
+};
+
+export type PutUserAboutRequestConfig = RequestConfig<PutUserAboutParams>;
