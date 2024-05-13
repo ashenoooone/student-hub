@@ -45,6 +45,7 @@ type ApiError = AxiosError<BaseError>;
 type PaginationType<T> = {
   page: number;
   size: number;
+  totalItems: number;
   totalPages: number;
   content: T
 }

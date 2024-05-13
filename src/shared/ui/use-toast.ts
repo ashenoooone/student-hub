@@ -5,6 +5,7 @@ import type {
   ToastActionElement,
   ToastProps,
 } from "@/shared//ui/toast"
+import {ReactNode} from "react";
 
 const TOAST_LIMIT = 1
 const TOAST_REMOVE_DELAY = 1000000
