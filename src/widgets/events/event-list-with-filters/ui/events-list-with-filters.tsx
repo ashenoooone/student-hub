@@ -43,6 +43,7 @@ export const EventsListWithFilters = React.memo(
     return (
       <div className={cn("flex flex-col gap-4", className)}>
         <EventsFilters
+          // TODO серч
           status={filters.status}
           onChangeSearch={onSearchChange}
           onChangeStatus={onStatusChange}
