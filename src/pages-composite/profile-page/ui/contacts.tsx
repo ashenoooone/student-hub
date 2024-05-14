@@ -19,9 +19,13 @@ import { isApiError } from "@/shared/api/utils";
 
 type InfoProps = {
   userMedia?: UserMediaType;
+  editable: boolean;
 };
 
-export const Contacts: FC<InfoProps> = ({ userMedia: userMediaFromProps }) => {
+export const Contacts: FC<InfoProps> = ({
+  userMedia: userMediaFromProps,
+  editable,
+}) => {
   const [isEdit, setIsEdit] = useState(false);
   const [lastUserMedia, setLastUserMedia] = useState(userMediaFromProps);
   const [userMedia, setUserMedia] = useState(userMediaFromProps);
@@ -197,6 +201,43 @@ export const Contacts: FC<InfoProps> = ({ userMedia: userMediaFromProps }) => {
     userMedia?.vkUrl,
   ]);
 
+  const buttons = useMemo(() => {
+    if (!editable) return null;
+    if (isEdit) {
+      return (
+        <div className="ml-auto">
+          <Button
+            onClick={onCancelClick}
+            size={"sm"}
+            variant={"ghost"}
+            className="mr-2 hover:text-red-700"
+          >
+            <CrossCircledIcon className="w-5 h-5" />
+          </Button>
+          <Button
+            className="hover:text-green-700"
+            onClick={onSaveContacts}
+            size="sm"
+            variant={"ghost"}
+          >
+            <CheckCircledIcon className="w-5 h-5" />
+          </Button>
+        </div>
+      );
+    } else {
+      return (
+        <Button
+          size="sm"
+          variant={"ghost"}
+          onClick={onChangeIsEdit}
+          className="absolute right-4 top-4"
+        >
+          <Pencil2Icon className="w-5 h-5" />
+        </Button>
+      );
+    }
+  }, []);
+
   if (!userMedia) {
     return null;
   }
@@ -205,35 +246,7 @@ export const Contacts: FC<InfoProps> = ({ userMedia: userMediaFromProps }) => {
     <Box className={"w-full flex flex-col gap-2 relative"}>
       <div className="flex">
         <Typography variant={"h3"}>Контакты</Typography>
-        {isEdit ? (
-          <div className="ml-auto">
-            <Button
-              onClick={onCancelClick}
-              size={"sm"}
-              variant={"ghost"}
-              className="mr-2 hover:text-red-700"
-            >
-              <CrossCircledIcon className="w-5 h-5" />
-            </Button>
-            <Button
-              className="hover:text-green-700"
-              onClick={onSaveContacts}
-              size="sm"
-              variant={"ghost"}
-            >
-              <CheckCircledIcon className="w-5 h-5" />
-            </Button>
-          </div>
-        ) : (
-          <Button
-            size="sm"
-            variant={"ghost"}
-            onClick={onChangeIsEdit}
-            className="absolute right-4 top-4"
-          >
-            <Pencil2Icon className="w-5 h-5" />
-          </Button>
-        )}
+        {buttons}
       </div>
       {content}
     </Box>

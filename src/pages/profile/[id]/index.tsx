@@ -13,84 +13,87 @@ import {
 } from "@/pages-composite/profile-page";
 import React, { FC } from "react";
 import { ROUTES } from "@/shared/conts";
+import { UserProfile } from "@/pages-composite/profile-page/ui/user-profile";
 
 type Props = {
   profile: UserType;
-  project: ProjectType;
+  project: ProjectType[];
   events: EventType[];
+  totalProjects: number;
+  totalEvents: number;
 };
 
-const Profile: FC<Props> = ({ profile, project, events }) => {
+const Profile: FC<Props> = (props) => {
   return (
     <Page>
-      <ProfileHeader profile={profile} />
-      <div className={"flex flex-row gap-4 pt-5 w-full"}>
-        <div className={"w-1/4 flex flex-col gap-4"}>
-          <Info user={profile} />
-        </div>
-        <div className={"w-3/4 flex flex-col gap-4"}>
-          <ProjectList projects={[project]} />
-          <Events events={events} />
-        </div>
-      </div>
+      <UserProfile {...props} />
     </Page>
   );
 };
 
 export const getServerSideProps = (async (context) => {
-  const { id } = context.params as { id: string | number };
-  if (context.req.cookies.cookie_profile) {
-    const userProfile = JSON.parse(
-      context.req.cookies.cookie_profile
-    ) as UserType;
-    if (userProfile && userProfile.id === +id) {
+  try {
+    const { id } = context.params as { id: string | number };
+    if (context.req.cookies.cookie_profile) {
+      const userProfile = JSON.parse(
+        context.req.cookies.cookie_profile
+      ) as UserType;
+      if (userProfile && userProfile.id === +id) {
+        return {
+          redirect: {
+            destination: ROUTES.profile,
+          },
+        };
+      }
+    }
+
+    if (!id || !context.req.cookies.cookie_user) {
       return {
-        redirect: {
-          destination: ROUTES.profile,
-        },
+        notFound: true,
       };
     }
-  }
+    const token = JSON.parse(
+      context.req.cookies.cookie_user
+    ) as TokensResponseType;
 
-  if (!id || !context.req.cookies.cookie_user) {
-    return {
-      notFound: true,
-    };
-  }
-  const token = JSON.parse(
-    context.req.cookies.cookie_user
-  ) as TokensResponseType;
-
-  const authConfig = {
-    config: {
-      headers: {
-        Authorization: `${token.type} ${token.accessToken}`,
+    const authConfig = {
+      config: {
+        headers: {
+          Authorization: `${token.type} ${token.accessToken}`,
+        },
       },
-    },
-  };
-  try {
+    };
     const [profile, projects, events] = await Promise.all([
       UsersService.instance.getUserById(id, authConfig),
-      ProjectService.instance.getAll({
-        config: {
-          ...authConfig.config,
-          params: {
-            page: 1,
-          },
+      UsersService.instance.getUserProjects({
+        params: {
+          id: +id,
+          limit: 3,
         },
       }),
-      EventsService.instance.getAll(),
+      UsersService.instance.getUserEvents({
+        params: {
+          id: +id,
+          limit: 3,
+        },
+      }),
     ]);
     return {
       props: {
         profile: profile.data,
-        project: projects.data.content[0],
-        events: events.data.content.slice(0, 4),
+        project: projects.data.content,
+        events: events.data.content,
+        totalProjects: projects.data.totalItems,
+        totalEvents: events.data.totalItems,
       },
     };
   } catch (error) {
     throw error;
+    return {
+      notFound: true,
+    };
   }
+  // todo пофиксить
 }) satisfies GetServerSideProps<Props>;
 
 export default Profile;

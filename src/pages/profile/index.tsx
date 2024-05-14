@@ -4,14 +4,7 @@ import React, { FC } from "react";
 import { AboutUser, UsersService } from "@/entities/user";
 import { TokensResponseType, UserType } from "@/entities/user/model/types";
 import { ProjectService, ProjectType } from "@/entities/project";
-import {
-  Events,
-  Info,
-  ProfileHeader,
-  ProjectList,
-} from "@/pages-composite/profile-page";
 import { EventType } from "@/entities/events/model/types";
-import { ProfileCompliments } from "@/pages-composite/profile-page/ui/profile-compliments";
 import { UserProfile } from "@/pages-composite/profile-page/ui/user-profile";
 import { RoleService, RoleType } from "@/entities/role";
 

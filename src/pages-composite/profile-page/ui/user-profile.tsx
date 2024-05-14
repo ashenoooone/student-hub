@@ -17,6 +17,7 @@ type UserProfileProps = {
   totalProjects: number;
   totalEvents: number;
   roles: RoleType[];
+  editable?: boolean;
 };
 
 export const UserProfile = React.memo((props: UserProfileProps) => {
@@ -27,6 +28,7 @@ export const UserProfile = React.memo((props: UserProfileProps) => {
     project,
     totalEvents,
     totalProjects,
+    editable = false,
     roles,
   } = props;
   return (
@@ -34,8 +36,8 @@ export const UserProfile = React.memo((props: UserProfileProps) => {
       <ProfileHeader profile={profile} />
       <div className={"flex flex-row gap-4 pt-5 w-full"}>
         <div className={"w-1/4 flex flex-col gap-4"}>
-          <Info userMedia={profile.media} />
-          <AboutUser roles={roles} profile={profile} />
+          <Info editable={editable} userMedia={profile.media} />
+          <AboutUser editable={editable} roles={roles} profile={profile} />
           <ProfileCompliments profile={profile} />
         </div>
         <div className={"w-3/4 flex flex-col gap-4"}>

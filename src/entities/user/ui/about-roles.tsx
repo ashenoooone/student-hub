@@ -20,17 +20,18 @@ type AboutRolesProps = {
   className?: string;
   profile: UserType;
   roles: RoleType[];
+  editable?: boolean;
 };
 
 export const AboutRoles = React.memo((props: AboutRolesProps) => {
-  const { className, profile, roles: defaultRoles } = props;
+  const { className, profile, roles: defaultRoles, editable } = props;
   const [roles, setRoles] = useState(profile.rolesForProject);
   const removeRole = useDeleteUserRolesMutation().mutateAsync;
   const addRole = usePatchUserRolesMutation().mutateAsync;
   const { toast } = useToast();
 
   const rolesItems = useMemo<Item[]>(() => {
-    return defaultRoles.map((i) => ({
+    return defaultRoles?.map((i) => ({
       label: i.name,
       value: `${i.id}`,
     }));
@@ -94,23 +95,25 @@ export const AboutRoles = React.memo((props: AboutRolesProps) => {
       <div className="flex gap-2 flex-wrap mt-2 items-center">
         {roles.map((role, index) => (
           <RoleSmall
-            onRemoveClick={onRemoveClick}
+            onRemoveClick={editable ? onRemoveClick : undefined}
             role={role}
             key={`role${role.id}${index}`}
           />
         ))}
-        <SearchCombobox
-          onItemClick={onAddToleClick}
-          className="ml-2"
-          closeOnClick
-          hasSearch
-          trigger={
-            <Button size={"sm"} className="max-h-5" variant={"ghost"}>
-              <PlusCircledIcon className="w-5 h-5" />
-            </Button>
-          }
-          items={rolesItems}
-        />
+        {editable && (
+          <SearchCombobox
+            onItemClick={onAddToleClick}
+            className="ml-2"
+            closeOnClick
+            hasSearch
+            trigger={
+              <Button size={"sm"} className="max-h-5" variant={"ghost"}>
+                <PlusCircledIcon className="w-5 h-5" />
+              </Button>
+            }
+            items={rolesItems}
+          />
+        )}
       </div>
     </div>
   );

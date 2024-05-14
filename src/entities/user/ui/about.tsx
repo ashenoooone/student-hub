@@ -11,14 +11,15 @@ type AboutUserProps = {
   className?: string;
   profile: UserType;
   roles: RoleType[];
+  editable?: boolean;
 };
 
 export const AboutUser = React.memo((props: AboutUserProps) => {
-  const { className, profile, roles } = props;
+  const { className, profile, roles, editable } = props;
   return (
     <Box className={cn(className, "flex flex-col gap-4")}>
-      <AboutText about={profile.media} />
-      <AboutRoles roles={roles} profile={profile} />
+      <AboutText editable={editable} about={profile.media} />
+      <AboutRoles editable={editable} roles={roles} profile={profile} />
     </Box>
   );
 });
