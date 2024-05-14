@@ -1,4 +1,4 @@
-import { AllStatistic, Statistic } from "@/entities/statistic";
+import { AllStatistic, StatisticCarousel } from "@/entities/statistic";
 import { Page } from "@/shared/ui/page";
 import { cn } from "@/shared/utils";
 import React from "react";
@@ -12,7 +12,7 @@ export const MainPage = React.memo((props: MainPageProps) => {
   const { className, statistic } = props;
   return (
     <Page className={cn("", className)}>
-      <Statistic statistic={statistic} />
+      <StatisticCarousel statistic={statistic} />
     </Page>
   );
 });

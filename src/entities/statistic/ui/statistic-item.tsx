@@ -13,7 +13,7 @@ export const StatisticItem = React.memo((props: StatisticItemProps) => {
   return (
     <Box
       className={cn(
-        "hover:scale-[101%] transition-all cursor-pointer font-bold uppercase flex text-center flex-col items-center gap-2",
+        "hover:scale-[101%] h-full transition-all cursor-pointer font-bold uppercase flex text-center flex-col items-center gap-2",
         className
       )}
     >
