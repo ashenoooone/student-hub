@@ -18,6 +18,7 @@ export const EventsListWithFilters = React.memo(
 
     const filters = useEventsFiltersStore.use.filters();
     const eventsFiltersChangePage = useEventsFiltersStore.use.setPage();
+    const eventsFiltersChangeStatus = useEventsFiltersStore.use.setStatus();
 
     const { data, isLoading, error, isFetching } = useGetAllEvents({
       ...filters,
@@ -32,9 +33,12 @@ export const EventsListWithFilters = React.memo(
 
     const onSearchChange = useCallback((value: string) => {}, []);
 
-    const onStatusChange = useCallback((status: EventStatus | "ALL") => {}, []);
-
-    // TODO обработка ошибок
+    const onStatusChange = useCallback(
+      (status: EventStatus | "ALL") => {
+        eventsFiltersChangeStatus(status);
+      },
+      [eventsFiltersChangeStatus]
+    );
 
     return (
       <div className={cn("flex flex-col gap-4", className)}>
