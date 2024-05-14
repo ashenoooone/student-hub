@@ -7,7 +7,7 @@ import { Box } from "@/shared/ui/box";
 
 type ProjectListProps = {
   projects: ProjectType[];
-  totalProjects: number;
+  totalProjects?: number;
 };
 
 export const ProjectList: FC<ProjectListProps> = ({
@@ -25,7 +25,7 @@ export const ProjectList: FC<ProjectListProps> = ({
             {projects.map((p) => (
               <ProjectCard project={p} key={p.id} />
             ))}
-            {totalProjects > projects.length && (
+            {totalProjects && totalProjects > projects.length && (
               <Button variant={"outline"} className="mt-5 w-max mx-auto">
                 Смотреть все проекты
               </Button>

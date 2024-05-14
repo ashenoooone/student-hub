@@ -8,38 +8,18 @@ import { CalendarIcon, ImageIcon } from "@radix-ui/react-icons";
 import { MembersList } from "@/shared/ui/members";
 import { ROUTES } from "@/shared/conts";
 import { NoImageAvailable } from "@/shared/assets/noImageAvailable";
-
-// for test members
-// [
-//   {
-//     link: "vk.com",
-//     name: "Roman",
-//     avatar:
-//       "https://pixelbox.ru/wp-content/uploads/2021/11/black-white-avatars-steam-pixelbox.ru-27.jpg",
-//   },
-//   {
-//     link: "vk.com",
-//     name: "IGOR",
-//     avatar:
-//       "https://distribution.faceit-cdn.net/images/ac97a03e-16fb-4c14-8676-c29f4b068e74.jpeg",
-//   },
-//   {
-//     link: "vk.com",
-//     name: "ILDAR",
-//     avatar:
-//       "https://distribution.faceit-cdn.net/images/5a70db89-1448-4a01-a56a-b8288a8dcdde.jpeg",
-//   },
-// ]
+import { ProjectType } from "@/entities/project";
+import { ProjectList } from "@/pages-composite/profile-page";
 
 type EventProps = {
   className?: string;
   event: EventType;
+  eventProjects?: ProjectType[];
 };
 
 export const Event = React.memo((props: EventProps) => {
-  const { className, event } = props;
-
-  return (
+  const { className, event, eventProjects } = props;
+  const eventContent = (
     <Box className={cn("p-10 flex gap-10 justify-between", className)}>
       <div className="basis-2/3 mt-2 flex flex-col">
         {/* main info */}
@@ -94,6 +74,17 @@ export const Event = React.memo((props: EventProps) => {
       </div>
     </Box>
   );
+
+  if (eventProjects) {
+    return (
+      <div className="flex flex-col gap-2">
+        {eventContent}
+        <ProjectList projects={eventProjects} />
+      </div>
+    );
+  }
+
+  return eventContent;
 });
 
 Event.displayName = "Event";

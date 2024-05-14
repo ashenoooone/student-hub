@@ -1,3 +1,5 @@
+import { TopEvent } from "@/entities/events";
+import { EventType } from "@/entities/events/model/types";
 import { Box } from "@/shared/ui/box";
 import { Typography } from "@/shared/ui/typography";
 import { cn } from "@/shared/utils";
@@ -5,17 +7,15 @@ import React from "react";
 
 type AboutUsProps = {
   className?: string;
+  topEvent?: EventType;
 };
 
 export const AboutUs = React.memo((props: AboutUsProps) => {
-  const { className } = props;
+  const { className, topEvent } = props;
   return (
     <Box className={cn("flex flex-col ", className)}>
-      <Typography variant={"h2"} className="text-3xl mb-4 font-semibold">
-        О нас
-      </Typography>
       <div className="flex gap-4 w-full">
-        <div className="flex basis-1/2 flex-col gap-5">
+        <div className="flex basis-1/2 flex-col">
           <Box className="border text-md mb-4">
             <span className="text-3xl">✋</span>{" "}
             <span className="font-bold text-lg">
@@ -28,6 +28,15 @@ export const AboutUs = React.memo((props: AboutUsProps) => {
               совместных проектов.
             </span>
           </Box>
+          <Box className="border text-md mb-4 self-end">
+            <span className="text-3xl">🎯</span>{" "}
+            <span className="font-bold text-lg">Наша цель </span>
+            <br />
+            Помочь студентам раскрыть свой потенциал, найти единомышленников и
+            претворить в жизнь самые смелые идеи. Мы стремимся к тому, чтобы наш
+            хаб стал местом, где каждый студент может найти поддержку,
+            вдохновение и новые возможности для роста и развития.
+          </Box>
           <Box className="border text-md">
             <span className="text-3xl">🤝</span>{" "}
             <span className="font-bold text-lg">
@@ -38,17 +47,7 @@ export const AboutUs = React.memo((props: AboutUsProps) => {
             и начните свой творческий путь вместе с нами!
           </Box>
         </div>
-        <div className="flex basis-1/2  flex-col items-center justify-center">
-          <Box className="border text-md mb-4 self-end">
-            <span className="text-3xl">🎯</span>{" "}
-            <span className="font-bold text-lg">Наша цель </span>
-            <br />
-            Помочь студентам раскрыть свой потенциал, найти единомышленников и
-            претворить в жизнь самые смелые идеи. Мы стремимся к тому, чтобы наш
-            хаб стал местом, где каждый студент может найти поддержку,
-            вдохновение и новые возможности для роста и развития.
-          </Box>
-        </div>
+        <TopEvent event={topEvent} className="basis-1/2" />
       </div>
     </Box>
   );

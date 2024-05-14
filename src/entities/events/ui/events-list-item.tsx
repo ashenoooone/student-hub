@@ -23,7 +23,6 @@ export const EventsListItem = React.memo((props: EventsListItemProps) => {
       <Link
         className={cn("flex flex-col justify-between h-full", className)}
         href={`${ROUTES.events}/${event.id}`}
-        target="_blank"
       >
         {event.avatar ? (
           <Image
