@@ -7,6 +7,7 @@ import { ProfileCompliments } from "./profile-compliments";
 import { UserType } from "@/entities/user/model/types";
 import { ProjectType } from "@/entities/project";
 import { EventType } from "@/entities/events/model/types";
+import { RoleType } from "@/entities/role";
 
 type UserProfileProps = {
   className?: string;
@@ -15,18 +16,26 @@ type UserProfileProps = {
   events: EventType[];
   totalProjects: number;
   totalEvents: number;
+  roles: RoleType[];
 };
 
 export const UserProfile = React.memo((props: UserProfileProps) => {
-  const { className, events, profile, project, totalEvents, totalProjects } =
-    props;
+  const {
+    className,
+    events,
+    profile,
+    project,
+    totalEvents,
+    totalProjects,
+    roles,
+  } = props;
   return (
     <div className={cn("", className)}>
       <ProfileHeader profile={profile} />
       <div className={"flex flex-row gap-4 pt-5 w-full"}>
         <div className={"w-1/4 flex flex-col gap-4"}>
           <Info userMedia={profile.media} />
-          <AboutUser profile={profile} />
+          <AboutUser roles={roles} profile={profile} />
           <ProfileCompliments profile={profile} />
         </div>
         <div className={"w-3/4 flex flex-col gap-4"}>

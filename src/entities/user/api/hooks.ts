@@ -1,6 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import { UsersService } from "../api";
 import {
+  DeleteUserRolesRequestConfig,
+  PatchUserRolesRequestConfig,
   PostLoginUserRequestConfig,
   PutUserAboutRequestConfig,
   PutUserMediaRequestConfig,
@@ -48,6 +50,38 @@ export const usePutUserMediaMutation = (
     mutationKey: ["usePutUserMediaMutation"],
     mutationFn: ({ params, config }) =>
       UsersService.instance.putUserMedia({
+        params,
+        config: { ...settings?.config, ...config },
+      }),
+    ...settings?.options,
+  });
+
+export const usePatchUserRolesMutation = (
+  settings?: MutationSettings<
+    PatchUserRolesRequestConfig,
+    typeof UsersService.instance.patchUserRole
+  >
+) =>
+  useMutation({
+    mutationKey: ["usePatchUserRolesMutation"],
+    mutationFn: ({ params, config }) =>
+      UsersService.instance.patchUserRole({
+        params,
+        config: { ...settings?.config, ...config },
+      }),
+    ...settings?.options,
+  });
+
+export const useDeleteUserRolesMutation = (
+  settings?: MutationSettings<
+    DeleteUserRolesRequestConfig,
+    typeof UsersService.instance.removeUserRole
+  >
+) =>
+  useMutation({
+    mutationKey: ["useDeleteUserRolesMutation"],
+    mutationFn: ({ params, config }) =>
+      UsersService.instance.removeUserRole({
         params,
         config: { ...settings?.config, ...config },
       }),
