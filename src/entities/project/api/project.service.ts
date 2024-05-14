@@ -25,6 +25,10 @@ export class ProjectService {
       url += "&limit=10";
     }
 
+    if (config?.params.needActualRoles) {
+      url += "&needActualRoles=" + config?.params.needActualRoles;
+    }
+
     if (config?.params.status) {
       url += "&status=" + config?.params.status;
     } else {

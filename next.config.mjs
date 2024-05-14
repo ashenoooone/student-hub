@@ -1,6 +1,6 @@
 // const api = "http://192.168.101.112:8080/";
-// const api = "https://it-hub.fita.cc/";
-const api = "https://api.student-hub.site/";
+const api = "https://it-hub.fita.cc/";
+// const api = "https://api.student-hub.site/";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
