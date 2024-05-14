@@ -112,7 +112,7 @@ export const AboutText = React.memo((props: AboutTextProps) => {
         <Typography variant={"h3"}>О себе</Typography>
         {buttons}
       </div>
-      {!isRedacting ? (
+      {isRedacting ? (
         <Textarea
           onChange={onChangeAboutText}
           className="mt-4"
