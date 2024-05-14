@@ -1,3 +1,6 @@
+import { ProjectType } from "@/entities/project";
+import { WithPagination } from "@/shared/types";
+
 export type Member = {
   id: number;
   name: string;
@@ -37,3 +40,14 @@ export type GetAllEventsResponse = {
 };
 
 export type GetAllEventsRequestConfig = RequestConfig<GetAllEventsParams>;
+
+export type GetEventProjectsParams = {
+  id: number;
+  page?: number;
+  limit?: number;
+};
+
+export type GetEventProjectsResponse = WithPagination<ProjectType[]>;
+
+export type GetEventProjectsRequestConfig =
+  RequestConfig<GetEventProjectsParams>;

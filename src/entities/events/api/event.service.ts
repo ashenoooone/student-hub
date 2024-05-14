@@ -1,10 +1,13 @@
-import {$api} from "@/shared/api";
+import { $api } from "@/shared/api";
 import {
   EventStatus,
   EventType,
   GetAllEventsRequestConfig,
   GetAllEventsResponse,
   GetEventByIdRequestConfig,
+  GetEventProjectsParams,
+  GetEventProjectsRequestConfig,
+  GetEventProjectsResponse,
 } from "@/entities/events/model/types";
 
 export class EventsService {
@@ -39,6 +42,24 @@ export class EventsService {
 
   async getEventById(config: GetEventByIdRequestConfig) {
     return $api.get<EventType>(`events/${config.params.id}`, config.config);
+  }
+
+  async getEventProjects(config: GetEventProjectsRequestConfig) {
+    let url = `events/${config.params.id}/projects`;
+
+    if (config?.params.page) {
+      url += "?page=" + config?.params.page;
+    } else {
+      url += "?page=1";
+    }
+
+    if (config?.params.limit) {
+      url += "&limit=" + config?.params.limit;
+    } else {
+      url += "&limit=10";
+    }
+
+    return $api.get<GetEventProjectsResponse>(url, config.config);
   }
 
   async getAll(config?: GetAllEventsRequestConfig) {
