@@ -57,10 +57,10 @@ export const ProjectCard: FC<ProjectCardProps> = ({ project, className }) => {
           {project.description}
         </Typography>
         <div className="flex mt-auto">
-          <div>
-            <Typography className="font-medium">Проекту нужны: </Typography>
-            {project.actualRoles &&
-              project.actualRoles.slice(0, 3).map((role, index) => (
+          {project.actualRoles && (
+            <div>
+              <Typography className="font-medium">Проекту нужны: </Typography>
+              {project.actualRoles.slice(0, 3).map((role, index) => (
                 <Badge
                   className={
                     "w-max max-w-[83px] select-none [&:not(:first-child)]:ml-1 text-ellipsis hover:bg-blue-400"
@@ -70,12 +70,13 @@ export const ProjectCard: FC<ProjectCardProps> = ({ project, className }) => {
                   {role.name}
                 </Badge>
               ))}
-            {project.actualRoles.length > 3 && (
-              <Badge className={"w-max ml-1 select-none hover:bg-blue-400"}>
-                ...
-              </Badge>
-            )}
-          </div>
+              {project.actualRoles && project.actualRoles.length > 3 && (
+                <Badge className={"w-max ml-1 select-none hover:bg-blue-400"}>
+                  ...
+                </Badge>
+              )}
+            </div>
+          )}
           {project.members && (
             <MembersList
               className="ml-auto self-end"
