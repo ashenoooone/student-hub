@@ -5,7 +5,7 @@ import {GetServerSideProps} from "next";
 import {TokensResponseType} from "@/entities/user/model/types";
 import {Typography} from "@/shared/ui/typography";
 import {Box} from "@/shared/ui/box";
-import {CommentsSections, ProjectDescription, ProjectHeader} from "@/pages-composite/projects-page";
+import {Commands, CommentsSections, ProjectHeader} from "@/pages-composite/projects-page";
 
 
 type Props = {
@@ -18,7 +18,7 @@ const Projects: FC<Props> = ({project}) => {
   return (
     <Page className={'gap-4'}>
       <ProjectHeader project={project}/>
-      <ProjectDescription project={project}/>
+      <Commands project={project}/>
       {project.actualRoles.length > 0 && <Box>
           <Typography variant={'h2'}>Свободные места</Typography>
         {project.actualRoles.map((role) => (<Typography affects={'lead'} key={role.id}>{role.name}</Typography>))}
