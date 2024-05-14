@@ -18,7 +18,7 @@ const store = createStore<ProfileStateType>()(
       setPage: (page) => set((state) => ({...state, currentPage: page})),
       roleFilter: 'ALL',
       search: undefined,
-      setSearch: search => set((state) => ({...state, search}))
+      setSearch: search => set((state) => ({...state, search})),
     })),
 );
 

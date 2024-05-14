@@ -1,5 +1,6 @@
 import {Page} from "@/shared/ui/page";
-import {Advert, ProjectsFilter, ProjectsList} from "@/pages-composite/projects-page";
+import {Advert, ProjectsList} from "@/pages-composite/projects-page";
+import {ProjectsFilter} from "@/features/projects/filter";
 
 
 const Projects = () => {

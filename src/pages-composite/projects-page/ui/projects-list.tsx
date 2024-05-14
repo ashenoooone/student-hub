@@ -15,7 +15,7 @@ export const ProjectsList: FC<ProjectsListProps> = (props) => {
     filter: {
       page: currentPage,
       search,
-      limit: 5
+      limit: 6
     }
   })
   return (
@@ -25,7 +25,7 @@ export const ProjectsList: FC<ProjectsListProps> = (props) => {
         {data?.content.map(project => (
           <ProjectTableCard key={project.id} project={project}/>))}
       </div>
-      <Pagination className={'mt-4'} onPageChange={setCurrentPage} totalCount={data?.totalItems ?? 0}
+      <Pagination className={'mt-4 justify-center'} onPageChange={setCurrentPage} totalCount={data?.totalItems ?? 0}
                   currentPage={currentPage}
                   pageSize={data?.size ?? 0}/>
     </div>
