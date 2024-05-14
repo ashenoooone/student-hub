@@ -19,10 +19,10 @@ export const CommentsSections: FC<CommentsSectionsProps> = ({project}) => {
   return (
     <Box className={'flex flex-col gap-3'}>
       <Typography variant={'h2'}>Комментарии</Typography>
+      <SendComment project={project}/>
       {isSuccess && comments.content.map(comment => (
         <Comment key={comment.id} comment={comment}/>
       ))}
-      <SendComment project={project}/>
       <Pagination currentPage={currentPage} onPageChange={setCurrentPage} pageSize={comments?.size ?? 0}
                   totalCount={comments?.totalItems ?? 0}/>
     </Box>
