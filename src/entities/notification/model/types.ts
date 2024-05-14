@@ -9,7 +9,7 @@ export type NotificationType = {
   project_id: number;
   project: ProjectType;
   type: 'REQUEST';
-  result: 'ACCEPTED' | 'WAIT';
+  result: 'ACEEPTED' | 'WAIT' | 'REFUSED';
   createdAt: string;
 }
 

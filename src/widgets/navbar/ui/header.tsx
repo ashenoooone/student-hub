@@ -17,7 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "@/shared/ui/dropdown-menu";
 import {ArchiveIcon, ExitIcon, HomeIcon} from "@radix-ui/react-icons";
-import {Notification} from "../../../entities/notification";
+import {Notification} from "@/entities/notification";
 
 type HeaderProps = {
   className?: string;
