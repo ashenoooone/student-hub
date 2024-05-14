@@ -4,6 +4,7 @@ import Image from "next/image";
 import {Typography} from "@/shared/ui/typography";
 import {UserType} from "@/entities/user/model/types";
 import {convertUserToMember} from "@/shared/utils/mapper";
+import {Badge} from "@/shared/ui/badge";
 
 
 type MemberProps = {
@@ -23,10 +24,13 @@ export const MemberCard: FC<MemberProps> = ({user}) => {
           <AvatarFallback>{member.name.slice(0, 2)}</AvatarFallback>
         )}
       </Avatar>
-      <Typography>{member.name}</Typography>
-      {user?.rolesForProject?.length > 0 && <div>
-          <Typography>{user.rolesForProject.length > 1 ? 'Роли:' : 'Роль: '} {user.rolesForProject?.map(el => el.name)?.join(', ') ?? ''}</Typography>
-      </div>}
+      <div className={'flex flex-col gap-1'}>
+        <Typography>{member.name}</Typography>
+        <div className={'flex flex-row gap-2'}>
+          {user.rolesForProject?.map(el => <Badge key={el.id}>{el.name}</Badge>)}
+        </div>
+      </div>
+
     </div>
   );
 };

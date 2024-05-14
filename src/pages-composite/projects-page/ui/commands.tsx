@@ -35,7 +35,7 @@ export const Commands: FC<CommandsProps> = ({project}) => {
       <Separator className={'border h-auto'} orientation={'vertical'} />
       <div className={'flex flex-col'}>
         <Typography variant={'h2'}>Члены команды</Typography>
-        <div className={'grid grid-col-2 gap-2'}>
+        <div className={'grid grid-flow-col grid-rows-3 grid-col-1 gap-5'}>
           {project.members.map(m => (
             <MemberCard key={m.id} user={m}/>
           ))}

@@ -8,6 +8,7 @@ import {MembersList} from "@/shared/ui/members";
 import {convertUserToMember} from "@/shared/utils/mapper";
 import {Box} from "@/shared/ui/box";
 import {Badge} from "@/shared/ui/badge";
+import Link from "next/link";
 
 type ProjectTableCardProps = {
   project: ProjectType;
@@ -41,11 +42,13 @@ export const ProjectTableCard: FC<ProjectTableCardProps> = ({project}) => {
         )}
       </div>
       <div className={'w-1/2 flex flex-col gap-2'}>
+        <Link href={`${ROUTES.projects}/${project.id}`}>
         <Typography
           variant={'h3'}
           affects={'large'}
           className={'underline underline-offset-2 text-2xl'}
         >{project.name}</Typography>
+        </Link>
         <Typography affects={'link'}>{PROJECT_STATUS[project.status as Status]}</Typography>
         <Typography>{project.description}</Typography>
         <Typography affects={'large'} className={'text-sm mt-auto'}>Количество
