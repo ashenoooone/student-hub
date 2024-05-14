@@ -15,7 +15,7 @@ export const AboutUs = React.memo((props: AboutUsProps) => {
         О нас
       </Typography>
       <div className="flex gap-4 w-full">
-        <div className="flex basis-1/2 flex-col gap-10">
+        <div className="flex basis-1/2 flex-col gap-5">
           <Box className="border text-md mb-4">
             <span className="text-3xl">✋</span>{" "}
             <span className="font-bold text-lg">

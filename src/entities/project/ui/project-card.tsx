@@ -8,12 +8,14 @@ import { ROUTES } from "@/shared/conts";
 import { Box } from "@/shared/ui/box";
 import { Avatar, AvatarFallback } from "@/shared/ui/avatar";
 import Image from "next/image";
+import { cn } from "@/shared/utils";
 
 type ProjectCardProps = {
   project: ProjectType;
+  className?: string;
 };
 
-export const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
+export const ProjectCard: FC<ProjectCardProps> = ({ project, className }) => {
   const members: Member[] = useMemo(
     () =>
       project.members?.map((user) => ({
@@ -26,7 +28,7 @@ export const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
   );
 
   return (
-    <Box className={"flex [&:not(:last-child)]:border-b gap-5"}>
+    <Box className={cn("flex [&:not(:last-child)]:border-b gap-5", className)}>
       <Avatar className="w-20 h-20">
         {project.avatar && (
           <Image

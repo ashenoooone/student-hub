@@ -55,3 +55,13 @@ export type GetAllProjectsParams = {
 export type GetAllProjectsRequestConfig = RequestConfig<GetAllProjectsParams>;
 
 export type GetAllProjectsResponse = WithPagination<ProjectType[]>;
+
+export type GetNeededProjectsParams = {
+  page?: number;
+  limit?: number;
+};
+
+export type GetNeededProjectsResponse = WithPagination<ProjectType[]>;
+
+export type GetNeededProjectsRequestConfig =
+  RequestConfig<GetNeededProjectsParams>;
