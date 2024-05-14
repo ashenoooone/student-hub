@@ -5,12 +5,7 @@ import { ProjectService, ProjectType } from "@/entities/project";
 import { EventsService } from "@/entities/events";
 import { GetServerSideProps } from "next";
 import { EventType } from "@/entities/events/model/types";
-import {
-  Events,
-  Info,
-  ProfileHeader,
-  ProjectList,
-} from "@/pages-composite/profile-page";
+
 import React, { FC } from "react";
 import { ROUTES } from "@/shared/conts";
 import { UserProfile } from "@/pages-composite/profile-page/ui/user-profile";
@@ -89,11 +84,9 @@ export const getServerSideProps = (async (context) => {
     };
   } catch (error) {
     throw error;
-    return {
-      notFound: true,
-    };
   }
   // todo пофиксить
+  // @ts-ignore
 }) satisfies GetServerSideProps<Props>;
 
 export default Profile;

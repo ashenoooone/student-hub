@@ -16,7 +16,7 @@ type UserProfileProps = {
   events: EventType[];
   totalProjects: number;
   totalEvents: number;
-  roles: RoleType[];
+  roles?: RoleType[];
   editable?: boolean;
 };
 

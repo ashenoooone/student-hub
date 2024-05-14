@@ -3,6 +3,7 @@ import { Typography } from "@/shared/ui/typography";
 import { cn } from "@/shared/utils";
 import React from "react";
 import { EventType } from "../model/types";
+import { Button } from "@/shared/ui/button";
 
 type TopEventProps = {
   className?: string;
@@ -14,14 +15,23 @@ export const TopEvent = React.memo((props: TopEventProps) => {
 
   return (
     <Box
-      className={cn("bg-gradient-to-r from-blue-600 to-violet-600", className)}
+      className={cn(
+        "bg-gradient-to-r text-white from-blue-600 to-violet-600",
+        className
+      )}
     >
-      <Typography className="text-white" variant={"h2"}>
+      <Typography className="uppercase mb-2" variant={"h2"}>
         Мероприятие дня
       </Typography>
-      <Typography className="text-white" variant={"h2"}>
+      <Typography className="" variant={"h2"}>
         {event?.name}
       </Typography>
+      <Typography className="font-medium line-clamp-[12] w-1/2">
+        {event?.description}
+      </Typography>
+      <Button variant={"outline"} className="text-black mt-4">
+        Узнать больше
+      </Button>
     </Box>
   );
 });

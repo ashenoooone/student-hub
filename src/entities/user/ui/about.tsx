@@ -10,7 +10,7 @@ import { RoleType } from "@/entities/role";
 type AboutUserProps = {
   className?: string;
   profile: UserType;
-  roles: RoleType[];
+  roles?: RoleType[];
   editable?: boolean;
 };
 

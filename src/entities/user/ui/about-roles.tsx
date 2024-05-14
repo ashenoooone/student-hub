@@ -19,7 +19,7 @@ import { Item, SearchCombobox } from "@/shared/ui/search-combobox";
 type AboutRolesProps = {
   className?: string;
   profile: UserType;
-  roles: RoleType[];
+  roles?: RoleType[];
   editable?: boolean;
 };
 
@@ -31,10 +31,12 @@ export const AboutRoles = React.memo((props: AboutRolesProps) => {
   const { toast } = useToast();
 
   const rolesItems = useMemo<Item[]>(() => {
-    return defaultRoles?.map((i) => ({
-      label: i.name,
-      value: `${i.id}`,
-    }));
+    return (
+      defaultRoles?.map((i) => ({
+        label: i.name,
+        value: `${i.id}`,
+      })) ?? []
+    );
   }, [defaultRoles]);
 
   const onAddToleClick = useCallback(
@@ -47,7 +49,7 @@ export const AboutRoles = React.memo((props: AboutRolesProps) => {
         });
         setRoles((roles) => [
           ...roles,
-          defaultRoles.find((i) => i.id === +id)!,
+          defaultRoles?.find((i) => i.id === +id)!,
         ]);
         toast({
           title: "Успешно",
