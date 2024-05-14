@@ -97,7 +97,7 @@ export const AboutRoles = React.memo((props: AboutRolesProps) => {
           <RoleSmall
             onRemoveClick={editable ? onRemoveClick : undefined}
             role={role}
-            key={`role${role.id}${index}`}
+            key={`role${role.id}${role.name}`}
           />
         ))}
         {editable && (
