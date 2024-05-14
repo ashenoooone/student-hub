@@ -1,5 +1,6 @@
 import { EventType } from "@/entities/events/model/types";
 import { ProjectType } from "@/entities/project";
+import { RoleType } from "@/entities/role";
 import { WithPagination } from "@/shared/types";
 import { Project } from "next/dist/build/swc";
 
@@ -59,7 +60,7 @@ export type UserType = {
   login: string;
   email: string;
   roles: string[];
-  rolesForProject: string[];
+  rolesForProject: RoleType[];
   avatar: string | null;
   firstName: string;
   lastName: string;
