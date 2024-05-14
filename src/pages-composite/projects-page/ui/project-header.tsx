@@ -22,14 +22,17 @@ export const ProjectHeader: FC<ProjectHeaderProps> = ({project}) => {
   return (
     <Box className={'flex flex-row gap-4'}>
       <div className={'w-1/2 flex flex-col gap-3'}>
-        <Typography variant={'h2'}>Проект {project.name}</Typography>
-        <Typography>{PROJECT_STATUS[project.status as Status]}</Typography>
+        <div className={'flex row justify-between items-center'}>
+          <Typography variant={'h2'}>Проект {project.name}</Typography>
+          <Typography affects={'link'}>{PROJECT_STATUS[project.status as Status]}</Typography>
+        </div>
+        <Typography className={'w-[80%]'}>{project.description}</Typography>
         <SendRequest project={project}/>
       </div>
       <div className={'w-1/2 flex flex-col gap-3'}>
         <Avatar className={'w-full min-h-[300px] !rounded-[12px]'}>
           {project.avatar ?
-            <Image className={'!rounded-[12px] w-full object-cover'} src={project.avatar} alt={project.name} width={100} height={100}/> :
+            <Image className={'!rounded-[12px] w-full object-cover'} src={project.avatar} alt={project.name} width={1000} height={1000}/> :
             <AvatarFallback className={'!rounded-[12px]'}>{project.name}</AvatarFallback>}
         </Avatar>
         <div className={'flex gap-2 items-center'}>
