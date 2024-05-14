@@ -14,6 +14,12 @@ export type ProjectType = {
   members: UserType[];
   actualRoles: RoleType[];
   createDate: string;
+  media: {
+    id: number;
+    githubLink: string;
+    stack: string;
+    urlSite: string;
+  }
 };
 
 export type CommentType = {
