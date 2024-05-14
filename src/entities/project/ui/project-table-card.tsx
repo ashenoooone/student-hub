@@ -30,7 +30,7 @@ export const ProjectTableCard: FC<ProjectTableCardProps> = ({project}) => {
         >{project.name}</Typography>
         <Typography affects={'link'}>{PROJECT_STATUS[project.status as Status]}</Typography>
         <Typography>{project.description}</Typography>
-        <Typography affects={'large'} className={'text-sm'}>Колличество
+        <Typography affects={'large'} className={'text-sm'}>Количество
           участников: {project.members.length}</Typography>
         <MembersList members={convertUserToMember(project.members)} totalMembers={project.members.length}/>
         {project.actualRoles.length > 0 && <div className={'flex flex-col gap-3 mt-3'}>
