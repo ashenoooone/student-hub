@@ -236,7 +236,7 @@ export const Contacts: FC<InfoProps> = ({
         </Button>
       );
     }
-  }, []);
+  }, [editable, isEdit, onCancelClick, onChangeIsEdit, onSaveContacts]);
 
   if (!userMedia) {
     return null;
