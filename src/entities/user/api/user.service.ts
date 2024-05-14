@@ -1,9 +1,11 @@
 import { $api } from "@/shared/api";
 import {
+  DeleteUserRolesRequestConfig,
   GetUserEventsRequestConfig,
   GetUserEventsResponse,
   GetUserProjectsRequestConfig,
   GetUserProjectsResponse,
+  PatchUserRolesRequestConfig,
   PostLoginUserRequestConfig,
   PostRefreshUserParams,
   PostRegisterUserParams,
@@ -85,6 +87,20 @@ export class UsersService {
 
   async putUserMedia(data: PutUserMediaRequestConfig) {
     return $api.put(`users/media`, data.params, data.config);
+  }
+
+  async removeUserRole(data: DeleteUserRolesRequestConfig) {
+    return $api.delete(
+      `users/rolesForProject/${data.params.roleId}`,
+      data.config
+    );
+  }
+
+  async patchUserRole(data: PatchUserRolesRequestConfig) {
+    return $api.patch(
+      `users/rolesForProject/${data.params.roleId}`,
+      data.config
+    );
   }
 
   static instance = new UsersService();

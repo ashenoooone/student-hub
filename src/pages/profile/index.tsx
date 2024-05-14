@@ -13,6 +13,7 @@ import {
 import { EventType } from "@/entities/events/model/types";
 import { ProfileCompliments } from "@/pages-composite/profile-page/ui/profile-compliments";
 import { UserProfile } from "@/pages-composite/profile-page/ui/user-profile";
+import { RoleService, RoleType } from "@/entities/role";
 
 type Props = {
   profile: UserType;
@@ -20,6 +21,7 @@ type Props = {
   events: EventType[];
   totalProjects: number;
   totalEvents: number;
+  roles: RoleType[];
 };
 
 export const getServerSideProps = (async (context) => {
@@ -41,7 +43,7 @@ export const getServerSideProps = (async (context) => {
   };
 
   try {
-    const [profile, projects, events] = await Promise.all([
+    const [profile, projects, events, roles] = await Promise.all([
       UsersService.instance.getUserData(authConfig),
       UsersService.instance.getUserProjects({
         params: {
@@ -55,6 +57,7 @@ export const getServerSideProps = (async (context) => {
           limit: 3,
         },
       }),
+      RoleService.instance.getAll(),
     ]);
 
     return {
@@ -64,6 +67,7 @@ export const getServerSideProps = (async (context) => {
         events: events.data.content,
         totalProjects: projects.data.totalItems,
         totalEvents: events.data.totalItems,
+        roles: roles.data,
       },
     };
   } catch (e) {

@@ -98,3 +98,15 @@ export type PutUserAboutRequestConfig = RequestConfig<PutUserAboutParams>;
 export type PutUserMediaParams = Omit<UserMediaType, "about">;
 
 export type PutUserMediaRequestConfig = RequestConfig<PutUserMediaParams>;
+
+export type PatchUserRolesParams = {
+  roleId: number;
+};
+
+export type PatchUserRolesRequestConfig = RequestConfig<PatchUserRolesParams>;
+
+export type DeleteUserRolesParams = {
+  roleId: number;
+};
+
+export type DeleteUserRolesRequestConfig = RequestConfig<DeleteUserRolesParams>;
