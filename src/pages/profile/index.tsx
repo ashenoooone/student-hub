@@ -12,6 +12,7 @@ import {
 } from "@/pages-composite/profile-page";
 import { EventType } from "@/entities/events/model/types";
 import { ProfileCompliments } from "@/pages-composite/profile-page/ui/profile-compliments";
+import { UserProfile } from "@/pages-composite/profile-page/ui/user-profile";
 
 type Props = {
   profile: UserType;
@@ -76,27 +77,10 @@ export const getServerSideProps = (async (context) => {
   // @ts-ignore
 }) satisfies GetServerSideProps<Props>;
 
-const Profile: FC<Props> = ({
-  profile,
-  project,
-  events,
-  totalProjects,
-  totalEvents,
-}) => {
+const Profile: FC<Props> = (props) => {
   return (
     <Page>
-      <ProfileHeader profile={profile} />
-      <div className={"flex flex-row gap-4 pt-5 w-full"}>
-        <div className={"w-1/4 flex flex-col gap-4"}>
-          <Info userMedia={profile.media} />
-          <AboutUser about={profile.media} />
-          <ProfileCompliments profile={profile} />
-        </div>
-        <div className={"w-3/4 flex flex-col gap-4"}>
-          <ProjectList totalProjects={totalProjects} projects={project} />
-          <Events totalEvents={totalEvents} events={events} />
-        </div>
-      </div>
+      <UserProfile {...props} />
     </Page>
   );
 };
