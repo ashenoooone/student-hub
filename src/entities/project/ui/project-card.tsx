@@ -19,48 +19,48 @@ type ProjectCardProps = {
 export const ProjectCard: FC<ProjectCardProps> = ({ project, className }) => {
   const members: Member[] = useMemo(
     () =>
-      project.members?.slice(0, 3).map((user) => ({
+      project?.members?.slice(0, 3).map((user) => ({
         id: user.id,
         name: user.login,
         link: `/profile/${user.id}`,
         avatar: user.avatar ?? "",
       })),
-    [project.members]
+    [project?.members]
   );
 
   return (
     <Box className={cn("flex [&:not(:last-child)]:border-b gap-5", className)}>
       <Avatar className="w-20 h-20">
-        {project.avatar && (
+        {project?.avatar && (
           <Image
-            width={1000}
-            height={1000}
+            width={10000}
+            height={10000}
             src={project.avatar}
             alt={project.name}
             className="object-cover"
           />
         )}
-        {!project.avatar && (
-          <AvatarFallback>{project.name.slice(0, 2)}</AvatarFallback>
+        {project?.avatar && (
+          <AvatarFallback>{project?.name?.slice(0, 2)}</AvatarFallback>
         )}
       </Avatar>
       <div className="flex flex-col w-full">
         <Link
-          href={`${ROUTES.projects}/${project.id}`}
+          href={`${ROUTES.projects}/${project?.id}`}
           className="text-primary w-max"
         >
           <Typography className="text-lg font-bold" affects={"link"}>
-            {project.name}
+            {project?.name}
           </Typography>
         </Link>
         <Typography affects={"muted"} className={"mb-3 line-clamp-3"}>
-          {project.description}
+          {project?.description}
         </Typography>
         <div className="flex mt-auto">
-          {project.actualRoles && project.actualRoles.length > 0 && (
+          {project?.actualRoles && project?.actualRoles.length > 0 && (
             <div>
               <Typography className="font-medium">Проекту нужны: </Typography>
-              {project.actualRoles.slice(0, 3).map((role, index) => (
+              {project?.actualRoles?.slice(0, 3).map((role, index) => (
                 <Badge
                   className={
                     "w-max max-w-[83px] select-none [&:not(:first-child)]:ml-1 text-ellipsis hover:bg-blue-400"
@@ -70,14 +70,14 @@ export const ProjectCard: FC<ProjectCardProps> = ({ project, className }) => {
                   {role.name}
                 </Badge>
               ))}
-              {project.actualRoles && project.actualRoles.length > 3 && (
+              {project?.actualRoles && project?.actualRoles.length > 3 && (
                 <Badge className={"w-max ml-1 select-none hover:bg-blue-400"}>
                   ...
                 </Badge>
               )}
             </div>
           )}
-          {project.members && (
+          {project?.members && (
             <MembersList
               className="ml-auto self-end"
               members={members}

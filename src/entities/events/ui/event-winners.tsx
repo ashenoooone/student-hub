@@ -20,9 +20,9 @@ export const EventWinners = React.memo((props: EventWinnersProps) => {
         Победители
       </Typography>
       <div className="flex flex-col gap-4">
-        <EventWinner icon="🥇" />
-        <EventWinner icon="🥈" />
-        <EventWinner icon="🥉" />
+        <EventWinner project={winners[0]} icon="🥇" />
+        <EventWinner project={winners[1]} icon="🥈" />
+        <EventWinner project={winners[2]} icon="🥉" />
       </div>
     </div>
   );

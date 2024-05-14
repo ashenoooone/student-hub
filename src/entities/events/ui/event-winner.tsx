@@ -13,7 +13,7 @@ type EventWinnerProps = {
 export const EventWinner = React.memo((props: EventWinnerProps) => {
   const { className, icon, project, iconClassName } = props;
   return (
-    <div className={cn("", className)}>
+    <div className={cn("flex items-center", className)}>
       <span className={cn("text-3xl", iconClassName)}>{icon}</span>
       <ProjectCard project={project} />
     </div>
