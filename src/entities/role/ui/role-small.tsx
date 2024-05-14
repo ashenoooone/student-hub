@@ -31,9 +31,9 @@ export const RoleSmall = React.memo((props: RoleSmallProps) => {
     >
       {role.name}
       {onRemoveClick && (
-        <CrossCircledIcon
+        <Cross1Icon
           onClick={onRemoveClickHandler}
-          className="w-4 h-4 transition-all cursor-pointer opacity-0 group-hover:opacity-100 hidden px-0 group-hover:block absolute right-2 hover:text-red-800"
+          className="w-3 h-3 transition-all cursor-pointer opacity-0 group-hover:opacity-100 hidden px-0 group-hover:block absolute right-2 hover:text-red-800"
         />
       )}
     </Badge>
