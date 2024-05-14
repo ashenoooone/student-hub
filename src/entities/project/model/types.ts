@@ -71,3 +71,11 @@ export type GetNeededProjectsResponse = WithPagination<ProjectType[]>;
 
 export type GetNeededProjectsRequestConfig =
   RequestConfig<GetNeededProjectsParams>;
+
+export type CreateProjectParamsType = {
+  name: string;
+  description: string;
+  githubUrl: string;
+  siteUrl: string;
+  stack: string;
+}
