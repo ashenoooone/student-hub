@@ -10,12 +10,15 @@ type Props = {
 };
 
 export const getServerSideProps = (async (context) => {
-  if (!context.req.cookies.cookie_user || !context.req.cookies.cookie_profile)
-    return { notFound: true };
+  let token: TokensResponseType | undefined = undefined;
+  let headers = {};
 
-  const token = JSON.parse(
-    context.req.cookies.cookie_user
-  ) as TokensResponseType;
+  if (context.req.cookies.cookie_user) {
+    token = JSON.parse(context.req.cookies.cookie_user) as TokensResponseType;
+    headers = {
+      Authorization: `${token.type} ${token.accessToken}`,
+    };
+  }
 
   try {
     const [statistic, projects] = await Promise.all([
@@ -26,14 +29,10 @@ export const getServerSideProps = (async (context) => {
           page: 1,
         },
         config: {
-          headers: {
-            Authorization: `${token.type} ${token.accessToken}`,
-          },
+          headers,
         },
       }),
     ]);
-
-    console.log(projects);
 
     return {
       props: {

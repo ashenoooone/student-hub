@@ -1,13 +1,13 @@
-import {useUserProfileStore} from "@/entities/user";
-import {ROUTES} from "@/shared/conts";
-import {Box} from "@/shared/ui/box";
-import {Button} from "@/shared/ui/button";
-import {Typography} from "@/shared/ui/typography";
-import {cn, isActiveLink} from "@/shared/utils";
-import {Avatar, AvatarFallback} from "@/shared/ui/avatar";
+import { useUserProfileStore } from "@/entities/user";
+import { ROUTES } from "@/shared/conts";
+import { Box } from "@/shared/ui/box";
+import { Button } from "@/shared/ui/button";
+import { Typography } from "@/shared/ui/typography";
+import { cn, isActiveLink } from "@/shared/utils";
+import { Avatar, AvatarFallback } from "@/shared/ui/avatar";
 import Link from "next/link";
 import React from "react";
-import {UserType} from "@/entities/user/model/types";
+import { UserType } from "@/entities/user/model/types";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,8 +16,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/shared/ui/dropdown-menu";
-import {ArchiveIcon, ExitIcon, HomeIcon} from "@radix-ui/react-icons";
-import {Notification} from "@/entities/notification";
+import { ArchiveIcon, ExitIcon, HomeIcon } from "@radix-ui/react-icons";
+import { Notification } from "@/entities/notification";
 
 type HeaderProps = {
   className?: string;
@@ -105,7 +105,7 @@ export const Header = React.memo((props: HeaderProps) => {
             Проекты
           </Button>
         </Link>
-        <Notification/>
+        {userProfileHydrated && userProfile && <Notification />}
         {userProfileHydrated && userProfile ? (
           <UserAvatar {...userProfile} />
         ) : (

@@ -57,7 +57,7 @@ export const ProjectCard: FC<ProjectCardProps> = ({ project, className }) => {
           {project.description}
         </Typography>
         <div className="flex mt-auto">
-          {project.actualRoles && (
+          {project.actualRoles && project.actualRoles.length > 0 && (
             <div>
               <Typography className="font-medium">Проекту нужны: </Typography>
               {project.actualRoles.slice(0, 3).map((role, index) => (
