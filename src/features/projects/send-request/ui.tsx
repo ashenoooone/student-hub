@@ -13,6 +13,7 @@ type SendRequestProps = {
 export const SendRequest: FC<SendRequestProps> = ({project}) => {
   const {toast} = useToast();
   const user = useUserProfileStore.use.profile();
+  const _hydrated = useUserProfileStore.use._hydrated();
 
   const [isRequestSend, setRequestSend] = useState<boolean>(false);
   const existInTeam = !!project.members.find(el => el.login === user?.login) ?? false;
@@ -37,7 +38,7 @@ export const SendRequest: FC<SendRequestProps> = ({project}) => {
 
   return (
     <>
-      {!existInTeam &&
+      {_hydrated && !existInTeam &&
           <Button size={'lg'} className={'mt-auto max-w-[238px]'} onClick={handleCreateRequest}
                   disabled={isRequestSend}>Подать
               заявку</Button>}
