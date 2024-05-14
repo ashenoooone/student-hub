@@ -36,7 +36,7 @@ export const Notification = () => {
       <Popover>
         <PopoverTrigger className={'relative'}>
           <BellIcon className="w-4 h-4 cursor-pointer hover:text-secondary"/>
-          <Typography className={'absolute bg-red-500 w-[17px] h-[17px] rounded-full text-white top-[-8px] right-[-12px] text-[11px]'} affects={'error'}>{data?.length}</Typography>
+          {data && data?.length > 0 && <Typography className={'absolute bg-red-500 w-[17px] h-[17px] rounded-full text-white top-[-8px] right-[-12px] text-[11px]'} affects={'error'}>{data?.length}</Typography>}
         </PopoverTrigger>
         <PopoverContent className={'px-2'}>
           <ScrollArea className={'flex flex-col'}>
