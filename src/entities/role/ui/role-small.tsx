@@ -24,7 +24,7 @@ export const RoleSmall = React.memo((props: RoleSmallProps) => {
       className={cn(
         "group py-1 relative px-4 transition-all flex items-center",
         {
-          "hover:pr-8": onRemoveClick,
+          "hover:pr-7 hover:pl-2": onRemoveClick,
         },
         className
       )}
