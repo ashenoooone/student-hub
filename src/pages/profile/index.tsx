@@ -77,7 +77,7 @@ export const getServerSideProps = (async (context) => {
 const Profile: FC<Props> = (props) => {
   return (
     <Page>
-      <UserProfile {...props} />
+      <UserProfile editable={true} {...props} />
     </Page>
   );
 };
