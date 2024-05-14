@@ -5,6 +5,7 @@ import {Avatar, AvatarFallback} from "@/shared/ui/avatar";
 import {Typography} from "@/shared/ui/typography";
 import {formatToRussianDate} from "@/shared/utils";
 import Image from 'next/image'
+import {ROUTES} from "@/shared/conts";
 
 type CommentProps = {
   comment: CommentType;
@@ -15,7 +16,7 @@ export const Comment: FC<CommentProps> = ({comment}) => {
     <Box variant={'blue'} key={comment.id}>
       <div className={'flex flex-col gap-3'}>
         <div className={'flex flex-row gap-2 items-center'}>
-          <Avatar>
+          <Avatar className={'cursor-pointer'} link={`${ROUTES.profile}/${comment.author.id}`}>
             {comment.author.avatar ?
               <Image src={comment.author.avatar} alt={comment.author.login} width={100} height={100}/> :
               <AvatarFallback>{comment.author.login.slice(0, 2)}</AvatarFallback>}
