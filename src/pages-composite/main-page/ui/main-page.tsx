@@ -15,17 +15,19 @@ type MainPageProps = {
 
 export const MainPage = React.memo((props: MainPageProps) => {
   const { className, statistic, neededProjects } = props;
+  console.log(statistic);
+
   return (
     <Page className={cn("flex flex-col gap-8", className)}>
       {neededProjects && neededProjects.length > 0 && (
         <Box>
           <Typography variant={"h3"} className="mb-4 text-center">
-            Проекты, в которых Вас ждут 🔍💼🎉
+            Проекты, в которых Вас ждут 🔍 💼 🎉
           </Typography>
           <ProjectsCarousel projects={neededProjects} />
         </Box>
       )}
-      <AboutUs />
+      <AboutUs topEvent={statistic?.statisticHot.topEvent} />
       <Box>
         <Typography variant={"h2"} className="text-3xl mb-4 font-semibold">
           Немного статистики
