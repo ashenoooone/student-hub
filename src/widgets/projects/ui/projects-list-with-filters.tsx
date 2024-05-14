@@ -65,7 +65,7 @@ export const ProjectsListWithFilters = React.memo(
         <Pagination
           className="self-center mt-4"
           onPageChange={onPageChange}
-          //   todo подумать над тем чтобы при пагинации брать из кеша данные о прошлйо страинице, чтобы она не прыгала
+          //   TODO подумать над тем чтобы при пагинации брать из кеша данные о прошлйо страинице, чтобы она не прыгала
           totalCount={(data && data.totalPages * data.size) ?? 0}
           currentPage={filters.page ?? 1}
           pageSize={filters?.limit ?? 10}

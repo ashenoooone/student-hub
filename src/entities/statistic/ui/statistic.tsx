@@ -6,11 +6,14 @@ import { StatisticItem } from "./statistic-item";
 
 type StatisticProps = {
   className?: string;
-  statistic: AllStatistic;
+  statistic?: AllStatistic;
 };
 
 export const Statistic = React.memo((props: StatisticProps) => {
   const { className, statistic } = props;
+
+  if (!statistic) return null;
+
   return (
     <div className={cn("", className)}>
       <Box className="grid grid-cols-4 gap-4">

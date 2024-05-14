@@ -36,3 +36,5 @@ export interface StatisticProject {
   countAllProjectOpen: number;
   countAllProjectComleted: number;
 }
+
+export type GetAllStatisticsResponse = AllStatistic;
