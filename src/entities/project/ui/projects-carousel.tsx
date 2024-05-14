@@ -26,7 +26,7 @@ export const ProjectsCarousel = React.memo((props: ProjectsCarouselProps) => {
         <CarouselContent>
           {projects.map((p) => (
             <CarouselItem className="md:basis-1 lg:basis-1/2" key={p.id}>
-              <ProjectCard className="border" project={p} />
+              <ProjectCard className="border h-full" project={p} />
             </CarouselItem>
           ))}
         </CarouselContent>
