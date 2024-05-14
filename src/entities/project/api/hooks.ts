@@ -6,7 +6,7 @@ import {
   ProjectService,
 } from "@/entities/project";
 
-const PROJECTS_KEY = "projects";
+export const PROJECTS_KEY = "projects";
 const PROJECTS_COMMENTS_KEY = "projects-comments";
 const COMMENT_KEY = "comment";
 
