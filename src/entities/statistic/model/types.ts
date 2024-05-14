@@ -3,11 +3,13 @@ import { EventType } from "@/entities/events/model/types";
 export interface AllStatistic {
   statisticPeople: StatisticPeople;
   statisticProject: StatisticProject;
-  lastCreatedProjects: LastCreatedProject[];
-  topEvent: TopEvent;
-  topRole: RoleStatistic;
-  rareRole: RoleStatistic;
-  findRole: RoleStatistic;
+  statisticHot: {
+    lastCreatedProjects: LastCreatedProject[];
+    topEvent: TopEvent;
+    topRole: RoleStatistic;
+    rareRole: RoleStatistic;
+    findRole: RoleStatistic;
+  };
 }
 
 export interface StatisticPeople {

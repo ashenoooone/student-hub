@@ -3,6 +3,8 @@ import {
   CommentType,
   GetAllProjectsRequestConfig,
   GetAllProjectsResponse,
+  GetNeededProjectsRequestConfig,
+  GetNeededProjectsResponse,
   ProjectType,
 } from "@/entities/project";
 
@@ -44,6 +46,24 @@ export class ProjectService {
       `commentsProject/${projectId}`,
       data?.config
     );
+  }
+
+  getNeededProjects(config?: GetNeededProjectsRequestConfig) {
+    let url = "projects/all/needed";
+
+    if (config?.params.page) {
+      url += "?page=" + config?.params.page;
+    } else {
+      url += "?page=1";
+    }
+
+    if (config?.params.limit) {
+      url += "&limit=" + config?.params.limit;
+    } else {
+      url += "&limit=10";
+    }
+
+    return $api.get<GetNeededProjectsResponse>(url, config?.config);
   }
 
   sendComment(
