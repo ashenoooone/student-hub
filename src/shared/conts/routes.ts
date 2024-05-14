@@ -6,4 +6,5 @@ export const ROUTES = {
   projects: "/projects",
   profile: "/profile",
   logout: "/logout",
+  users: "/users"
 };

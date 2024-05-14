@@ -1,12 +1,14 @@
-import { useMutation } from "@tanstack/react-query";
+import {useMutation, useQuery} from "@tanstack/react-query";
 import { UsersService } from "../api";
 import {
-  DeleteUserRolesRequestConfig,
-  PatchUserRolesRequestConfig,
-  PostLoginUserRequestConfig,
-  PutUserAboutRequestConfig,
-  PutUserMediaRequestConfig,
+    DeleteUserRolesRequestConfig, GetAllUsersParams, GetAllUsersParamsConfig,
+    PatchUserRolesRequestConfig,
+    PostLoginUserRequestConfig,
+    PutUserAboutRequestConfig,
+    PutUserMediaRequestConfig,
 } from "../model/types";
+
+export const USERS_KEY = "users";
 
 export const usePostLoginUserMutation = (
   settings?: MutationSettings<
@@ -23,6 +25,17 @@ export const usePostLoginUserMutation = (
       }),
     ...settings?.options,
   });
+
+export const useGetAllUsers = (settings: GetAllUsersParams) =>
+    useQuery({
+        queryFn: () =>
+            UsersService.instance.getAllUsers({
+                params: settings
+            }),
+        queryKey: [USERS_KEY, ...Object.values(settings)],
+        select: ({ data }) => data,
+    });
+
 
 export const usePutUserAboutMutation = (
   settings?: MutationSettings<

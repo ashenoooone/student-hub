@@ -87,6 +87,8 @@ export type GetUserProjectsParams = {
 
 export type GetUserProjectsResponse = WithPagination<ProjectType[]>;
 
+export type GetAllUsersResponse = WithPagination<UserType[]>
+
 export type GetUserProjectsRequestConfig = RequestConfig<GetUserProjectsParams>;
 
 export type PutUserAboutParams = {
@@ -109,4 +111,12 @@ export type DeleteUserRolesParams = {
   roleId: number;
 };
 
+export type GetAllUsersParams = {
+  page: number;
+  limit: number;
+  search: string | null;
+  roles: RoleType[];
+}
+
 export type DeleteUserRolesRequestConfig = RequestConfig<DeleteUserRolesParams>;
+export type GetAllUsersParamsConfig = RequestConfig<GetAllUsersParams>
