@@ -9,6 +9,7 @@ import { Box } from "@/shared/ui/box";
 import { Avatar, AvatarFallback } from "@/shared/ui/avatar";
 import Image from "next/image";
 import { cn } from "@/shared/utils";
+import { Badge } from "@/shared/ui/badge";
 
 type ProjectCardProps = {
   project: ProjectType;
@@ -18,7 +19,7 @@ type ProjectCardProps = {
 export const ProjectCard: FC<ProjectCardProps> = ({ project, className }) => {
   const members: Member[] = useMemo(
     () =>
-      project.members?.map((user) => ({
+      project.members?.slice(0, 3).map((user) => ({
         id: user.id,
         name: user.login,
         link: `/profile/${user.id}`,
@@ -52,16 +53,37 @@ export const ProjectCard: FC<ProjectCardProps> = ({ project, className }) => {
             {project.name}
           </Typography>
         </Link>
-        <Typography affects={"muted"} className={"mb-3"}>
+        <Typography affects={"muted"} className={"mb-3 line-clamp-3"}>
           {project.description}
         </Typography>
-        {project.members && (
-          <MembersList
-            className="ml-auto"
-            members={members}
-            totalMembers={project.members.length}
-          />
-        )}
+        <div className="flex mt-auto">
+          <div>
+            <Typography className="font-medium">Проекту нужны: </Typography>
+            {project.actualRoles &&
+              project.actualRoles.slice(0, 3).map((role, index) => (
+                <Badge
+                  className={
+                    "w-max max-w-[83px] select-none [&:not(:first-child)]:ml-1 text-ellipsis hover:bg-blue-400"
+                  }
+                  key={index}
+                >
+                  {role.name}
+                </Badge>
+              ))}
+            {project.actualRoles.length > 3 && (
+              <Badge className={"w-max ml-1 select-none hover:bg-blue-400"}>
+                ...
+              </Badge>
+            )}
+          </div>
+          {project.members && (
+            <MembersList
+              className="ml-auto self-end"
+              members={members}
+              totalMembers={project.members.length}
+            />
+          )}
+        </div>
       </div>
     </Box>
   );
