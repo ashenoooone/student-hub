@@ -30,3 +30,15 @@ export type CommentType = {
 export type CommentParamsType = {
   projectId: number;
 } & Pick<CommentType, 'text' | 'createDate'>
+
+export type ProjectQueryParamsTypes = {
+  filter: {
+    page: number;
+    limit?: number;
+    search?: string;
+  }
+}
+
+export type ProjectsFilterParamsType = {
+  search?: string;
+}
