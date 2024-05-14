@@ -34,9 +34,11 @@ export const TopEvent = React.memo((props: TopEventProps) => {
         <Typography className="font-medium line-clamp-[12]">
           {event?.description}
         </Typography>
-        <Button variant={"outline"} className="text-black mt-auto">
-          <Link href={`${ROUTES.events}/${event?.id}`}>Узнать больше</Link>
-        </Button>
+        {event && (
+          <Button variant={"outline"} className="text-black mt-auto">
+            <Link href={`${ROUTES.events}/${event?.id}`}>Узнать больше</Link>
+          </Button>
+        )}
       </div>
       <div className="">
         {event && event.avatar && (

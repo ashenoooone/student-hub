@@ -80,7 +80,7 @@ export const StatisticCarousel = React.memo((props: StatisticProps) => {
               text={
                 <>
                   самая разыскиваемая роль&nbsp;-&nbsp;
-                  {statistic.statisticHot.findRole.name}
+                  {statistic.statisticHot.findRole?.name}
                 </>
               }
             />
@@ -92,7 +92,7 @@ export const StatisticCarousel = React.memo((props: StatisticProps) => {
               text={
                 <>
                   самая распространенная роль&nbsp;-&nbsp;
-                  {statistic.statisticHot.topRole.name}
+                  {statistic.statisticHot.topRole?.name}
                 </>
               }
             />
@@ -104,7 +104,7 @@ export const StatisticCarousel = React.memo((props: StatisticProps) => {
               text={
                 <>
                   самая редкая роль&nbsp;-&nbsp;
-                  {statistic.statisticHot.rareRole.name}
+                  {statistic.statisticHot.rareRole?.name}
                 </>
               }
             />

@@ -10,6 +10,7 @@ import { ROUTES } from "@/shared/conts";
 import { NoImageAvailable } from "@/shared/assets/noImageAvailable";
 import { ProjectType } from "@/entities/project";
 import { ProjectList } from "@/pages-composite/profile-page";
+import { EventWinners } from "./event-winners";
 
 type EventProps = {
   className?: string;
@@ -40,6 +41,7 @@ export const Event = React.memo((props: EventProps) => {
               {formatToRussianDate(event.endDate, true)}
             </Typography>
           </div>
+          <EventWinners className="mt-4" winners={event.winners} />
         </div>
       </div>
       <div>

@@ -17,6 +17,7 @@ export type EventType = {
   status: string;
   membersCount: number;
   members?: Member[];
+  winners: ProjectType[];
 };
 
 export type EventStatus = "PLANNED" | "OPEN" | "COMPLETED";
