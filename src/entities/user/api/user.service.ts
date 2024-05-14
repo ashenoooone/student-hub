@@ -1,6 +1,6 @@
 import { $api } from "@/shared/api";
 import {
-  DeleteUserRolesRequestConfig,
+  DeleteUserRolesRequestConfig, GetAllUsersParams, GetAllUsersParamsConfig, GetAllUsersResponse,
   GetUserEventsRequestConfig,
   GetUserEventsResponse,
   GetUserProjectsRequestConfig,
@@ -101,6 +101,36 @@ export class UsersService {
       `users/rolesForProject/${data.params.roleId}`,
       data.config
     );
+  }
+
+  async getAllUsers(data: GetAllUsersParamsConfig){
+    let url = "users/all"
+
+    if (data?.params.page) {
+      url += "?page=" + data?.params.page;
+    } else {
+      url += "?page=1";
+    }
+
+    if (data?.params.limit) {
+      url += "&limit=" + data?.params.limit;
+    } else {
+      url += "&limit=3";
+    }
+
+    if (data?.params.search) {
+      url += "&search=" + data?.params.search;
+    } else {
+      url += "&search=''";
+    }
+
+    if (data?.params.roles) {
+      url += "&roles=" + data?.params.roles.map(item => item.id).join(";");
+    } else {
+      url += "&roles=''";
+    }
+
+    return $api.get<GetAllUsersResponse>(url, data?.config);
   }
 
   static instance = new UsersService();

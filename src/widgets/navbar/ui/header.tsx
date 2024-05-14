@@ -85,6 +85,16 @@ export const Header = React.memo((props: HeaderProps) => {
         </Typography>
       </Link>
       <div className="flex items-center gap-4">
+        <Link href={ROUTES.users}>
+          <Button
+              variant={"link"}
+              className={cn("p-0", {
+                "text-primary": isActiveLink(ROUTES.users),
+              })}
+          >
+            Пользователи
+          </Button>
+        </Link>
         <Link href={ROUTES.events}>
           <Button
             variant={"link"}

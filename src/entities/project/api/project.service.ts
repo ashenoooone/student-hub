@@ -1,6 +1,6 @@
 import { $api } from "@/shared/api";
 import {
-  CommentType,
+  CommentType, CreateProjectParamsType,
   GetAllProjectsRequestConfig,
   GetAllProjectsResponse,
   GetNeededProjectsRequestConfig,
@@ -80,6 +80,10 @@ export class ProjectService {
       comment,
       data?.config
     );
+  }
+
+  createProject(data: CreateProjectParamsType) {
+    return $api.post<ProjectType>('projects', data)
   }
 
   static instance = new ProjectService();
