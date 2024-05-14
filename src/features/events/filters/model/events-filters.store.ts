@@ -5,7 +5,7 @@ import { EventStatus, GetAllEventsParams } from "@/entities/events/model/types";
 
 type EventsFiltersStoreType = {
   filters: GetAllEventsParams;
-  setStatus: (status: EventStatus) => void;
+  setStatus: (status: EventStatus | "ALL") => void;
   setPage: (page: number) => void;
   setLimit: (limit: number) => void;
 };
