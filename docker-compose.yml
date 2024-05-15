@@ -10,5 +10,4 @@ services:
     volumes:
       - .:/app
     environment:
-      - NODE_ENV=production
-    command: ["npm", "start"]
+      - NODE_ENV=productiony
