@@ -4,7 +4,7 @@ import { Typography } from "@/shared/ui/typography";
 import React, { FC } from "react";
 import { UserRatingMapper, UserType } from "@/entities/user/model/types";
 import { Compliment } from "./compliment";
-
+import Image from "next/image";
 type ProfileHeaderProps = {
   profile: UserType;
 };
@@ -18,7 +18,17 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({ profile }) => {
     >
       <Box className={"w-max flex flex-col gap-4 items-center bg-black/20"}>
         <Avatar className={"w-[115px] h-[115px] text-5xl"}>
-          <AvatarFallback>{profile.login.slice(0, 2)}</AvatarFallback>
+          {profile.avatar && (
+            <Image
+              src={profile.avatar}
+              alt={profile.login}
+              width={1000}
+              height={1000}
+            />
+          )}
+          {!profile.avatar && (
+            <AvatarFallback>{profile.login.slice(0, 2)}</AvatarFallback>
+          )}
         </Avatar>
         <Typography
           variant={"h1"}

@@ -39,24 +39,13 @@ const Projects: FC<Props> = ({ project }) => {
 export const getServerSideProps = (async (context) => {
   const { id } = context.params as { id: string | number };
 
-  if (!id || !context.req.cookies.cookie_user) {
+  if (!id) {
     return {
       notFound: true,
     };
   }
-  const token = JSON.parse(
-    context.req.cookies.cookie_user
-  ) as TokensResponseType;
 
-  const authConfig = {
-    config: {
-      headers: {
-        Authorization: `${token.type} ${token.accessToken}`,
-      },
-    },
-  };
-
-  const project = await ProjectService.instance.getById(+id, authConfig);
+  const project = await ProjectService.instance.getById(+id);
 
   return {
     props: {

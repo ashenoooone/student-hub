@@ -42,24 +42,14 @@ export const getServerSideProps = (async (context) => {
       }
     }
 
-    if (!id || !context.req.cookies.cookie_user) {
+    if (!id) {
       return {
         notFound: true,
       };
     }
-    const token = JSON.parse(
-      context.req.cookies.cookie_user
-    ) as TokensResponseType;
 
-    const authConfig = {
-      config: {
-        headers: {
-          Authorization: `${token.type} ${token.accessToken}`,
-        },
-      },
-    };
     const [profile, projects, events] = await Promise.all([
-      UsersService.instance.getUserById(id, authConfig),
+      UsersService.instance.getUserById(id),
       UsersService.instance.getUserProjects({
         params: {
           id: +id,
@@ -83,6 +73,7 @@ export const getServerSideProps = (async (context) => {
       },
     };
   } catch (error) {
+    console.log(error);
     throw error;
   }
   // todo пофиксить

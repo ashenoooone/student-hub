@@ -40,7 +40,7 @@ export const ProjectCard: FC<ProjectCardProps> = ({ project, className }) => {
             className="object-cover"
           />
         )}
-        {project?.avatar && (
+        {!project?.avatar && (
           <AvatarFallback>{project?.name?.slice(0, 2)}</AvatarFallback>
         )}
       </Avatar>
