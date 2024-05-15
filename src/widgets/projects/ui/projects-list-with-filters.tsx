@@ -1,15 +1,10 @@
 import { cn } from "@/shared/utils";
 import React, { useCallback } from "react";
-import {
-  PROJECTS_KEY,
-  useGetAllProjects,
-  useProjectFiltersStore,
-} from "@/entities/project";
+import { useGetAllProjects, useProjectFiltersStore } from "@/entities/project";
 import { ProjectsFilter } from "@/features/projects/filter";
 import { EventStatus } from "@/entities/events/model/types";
 import Pagination from "@/shared/ui/pagination";
 import { ProjectsList } from "@/entities/project/ui/projects-list";
-import { useGetFromCache } from "@/shared/utils/useGetFromCache";
 
 type ProjectsListWithFiltersProps = {
   className?: string;
@@ -23,9 +18,8 @@ export const ProjectsListWithFilters = React.memo(
     const setStatus = useProjectFiltersStore.use.setStatus();
     const setNeedActualRoles = useProjectFiltersStore.use.setNeedActualRoles();
     const setPage = useProjectFiltersStore.use.setPage();
-    const dataFromCache = useGetFromCache(PROJECTS_KEY);
 
-    const { data, error, isLoading, isFetching } = useGetAllProjects({
+    const { data, isLoading, isFetching } = useGetAllProjects({
       ...filters,
     });
 

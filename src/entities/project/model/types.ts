@@ -19,7 +19,7 @@ export type ProjectType = {
     githubLink: string;
     stack: string;
     urlSite: string;
-  }
+  };
 };
 
 export type CommentType = {
@@ -56,6 +56,7 @@ export type GetAllProjectsParams = {
   search?: string;
   status?: EventStatus | "ALL";
   needActualRoles?: boolean;
+  userId?: number;
 };
 
 export type GetAllProjectsRequestConfig = RequestConfig<GetAllProjectsParams>;
@@ -78,4 +79,4 @@ export type CreateProjectParamsType = {
   githubUrl: string;
   siteUrl: string;
   stack: string;
-}
+};

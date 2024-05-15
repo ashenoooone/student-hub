@@ -1,6 +1,7 @@
 import { $api } from "@/shared/api";
 import {
-  CommentType, CreateProjectParamsType,
+  CommentType,
+  CreateProjectParamsType,
   GetAllProjectsRequestConfig,
   GetAllProjectsResponse,
   GetNeededProjectsRequestConfig,
@@ -37,6 +38,9 @@ export class ProjectService {
 
     if (config?.params.search && config?.params.search.length > 0) {
       url += "&search=" + config?.params.search;
+    }
+    if (config?.params.userId) {
+      url += "&userId=" + config?.params.userId;
     }
     return $api.get<GetAllProjectsResponse>(url, config?.config);
   }
@@ -83,7 +87,7 @@ export class ProjectService {
   }
 
   createProject(data: CreateProjectParamsType) {
-    return $api.post<ProjectType>('projects', data)
+    return $api.post<ProjectType>("projects", data);
   }
 
   static instance = new ProjectService();

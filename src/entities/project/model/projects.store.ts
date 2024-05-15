@@ -10,6 +10,7 @@ type ProjectFiltersStateType = {
   setSearch: (search: string | undefined) => void;
   setStatus: (status: EventStatus | "ALL") => void;
   setNeedActualRoles: (needActualRoles: boolean) => void;
+  setUserId: (userId: number) => void;
 };
 
 export const COOKIE_PROFILE = "cookie_profile";
@@ -27,6 +28,10 @@ const store = createStore<ProjectFiltersStateType>()(
       status: "ALL",
       needActualRoles: false,
     },
+    setUserId: (userId) =>
+      set((state) => {
+        state.filters.userId = userId;
+      }),
     setPage: (page) =>
       set((state) => {
         state.filters.page = page;
