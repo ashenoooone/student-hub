@@ -13,6 +13,7 @@ export const EventWinners = React.memo((props: EventWinnersProps) => {
   const { className, winners } = props;
 
   if (!winners) return null;
+  console.log(winners);
 
   return (
     <div className={cn("", className)}>

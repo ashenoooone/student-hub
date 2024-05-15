@@ -21,11 +21,11 @@ export const ProjectsCarousel = React.memo((props: ProjectsCarouselProps) => {
   if (!projects) return null;
 
   return (
-    <div className={cn("px-16", className)}>
+    <div className={cn("px-16 w-full", className)}>
       <Carousel>
         <CarouselContent>
           {projects.map((p) => (
-            <CarouselItem className="md:basis-1 lg:basis-1/2" key={p.id}>
+            <CarouselItem className="lg:basis-1/2" key={p.id}>
               <ProjectCard className="border h-full" project={p} />
             </CarouselItem>
           ))}
