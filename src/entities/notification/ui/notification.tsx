@@ -44,11 +44,11 @@ export const Notification = () => {
       </PopoverTrigger>
       <PopoverContent className={"px-2"}>
         <ScrollArea className={"flex flex-col"}>
-          {(isLoading || isFetching) &&
-            Array.from({ length: 3 }).map((_, index) => (
-              <Skeleton key={index} className={"h-10"} />
-            ))}
-          {isSuccess && data.map(renderNotification)}
+          {isLoading || isFetching
+            ? Array.from({ length: 3 }).map((_, index) => (
+                <Skeleton key={index} className={"h-10 mt-2"} />
+              ))
+            : data && data?.map(renderNotification)}
         </ScrollArea>
       </PopoverContent>
     </Popover>

@@ -8,6 +8,7 @@ import ComplimentMini from "@/entities/user/ui/compliment";
 import { Typography } from "@/shared/ui/typography";
 import { ROUTES } from "@/shared/conts";
 import { RolesList } from "@/entities/role";
+import Link from "next/link";
 
 type Props = {
   user: UserType;
@@ -42,7 +43,9 @@ const CardUser = (props: Props) => {
       </Avatar>
       <div className={" flex flex-col mt-2 ml-2"}>
         <div className={"text-md font-medium"}>
-          {user.lastName} {user.firstName} {user.middleName}
+          <Link href={`${ROUTES.profile}/${user.id}`}>
+            {user.lastName} {user.firstName} {user.middleName}
+          </Link>
         </div>
         <div className={"flex flex-row gap-2 mt-2"}>
           <RolesList roles={user.rolesForProject} />
