@@ -7,6 +7,7 @@ import { Compliment } from "@/pages-composite/profile-page/ui/compliment";
 import ComplimentMini from "@/entities/user/ui/compliment";
 import { Typography } from "@/shared/ui/typography";
 import { ROUTES } from "@/shared/conts";
+import { RolesList } from "@/entities/role";
 
 type Props = {
   user: UserType;
@@ -44,22 +45,7 @@ const CardUser = (props: Props) => {
           {user.lastName} {user.firstName} {user.middleName}
         </div>
         <div className={"flex flex-row gap-2 mt-2"}>
-          {user.rolesForProject.slice(0, 2).map((role, index) => (
-            <Badge
-              className={
-                "w-max max-w-[83px] text-ellipsis text-[12px] hover:bg-blue-400 select-none"
-              }
-              key={index}
-            >
-              {role.name}
-            </Badge>
-          ))}
-          {user.rolesForProject.length > 2 && (
-            <Badge className={"w-max hover:bg-blue-400 select-none"}>...</Badge>
-          )}
-          {user.rolesForProject.length === 0 && (
-            <Typography affects={"muted"}>Роли отсутствуют</Typography>
-          )}
+          <RolesList roles={user.rolesForProject} />
         </div>
         <div className={"flex flex-row gap-2 mt-2 "}>
           <ComplimentMini
