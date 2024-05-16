@@ -4,15 +4,19 @@ import { ProjectType } from "@/entities/project";
 import { FC } from "react";
 import { Button } from "@/shared/ui/button";
 import { Box } from "@/shared/ui/box";
+import Link from "next/link";
+import { ROUTES } from "@/shared/conts";
 
 type ProjectListProps = {
   projects: ProjectType[];
   totalProjects?: number;
+  linkToAll?: string;
 };
 
 export const ProjectList: FC<ProjectListProps> = ({
   projects,
   totalProjects,
+  linkToAll,
 }) => {
   return (
     <Box>
@@ -27,7 +31,9 @@ export const ProjectList: FC<ProjectListProps> = ({
             ))}
             {totalProjects && totalProjects > projects.length && (
               <Button variant={"outline"} className="mt-5 w-max mx-auto">
-                Смотреть все проекты
+                <Link href={linkToAll ?? ROUTES.projects}>
+                  Смотреть все проекты
+                </Link>
               </Button>
             )}
           </>

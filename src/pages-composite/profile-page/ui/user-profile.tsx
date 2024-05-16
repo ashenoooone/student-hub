@@ -8,6 +8,7 @@ import { UserType } from "@/entities/user/model/types";
 import { ProjectType } from "@/entities/project";
 import { EventType } from "@/entities/events/model/types";
 import { RoleType } from "@/entities/role";
+import { ROUTES } from "@/shared/conts";
 
 type UserProfileProps = {
   className?: string;
@@ -41,7 +42,11 @@ export const UserProfile = React.memo((props: UserProfileProps) => {
           <ProfileCompliments profile={profile} />
         </div>
         <div className={"w-3/4 flex flex-col gap-4"}>
-          <ProjectList totalProjects={totalProjects} projects={project} />
+          <ProjectList
+            linkToAll={`${ROUTES.profile}/${profile.id}/projects`}
+            totalProjects={totalProjects}
+            projects={project}
+          />
           <Events totalEvents={totalEvents} events={events} />
         </div>
       </div>
