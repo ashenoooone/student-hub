@@ -16,7 +16,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/shared/ui/dropdown-menu";
-import { ArchiveIcon, ExitIcon, HomeIcon } from "@radix-ui/react-icons";
+import {
+  ArchiveIcon,
+  ExitIcon,
+  HomeIcon,
+  PlusIcon,
+} from "@radix-ui/react-icons";
 import { Notification } from "@/entities/notification";
 
 type HeaderProps = {
@@ -87,10 +92,10 @@ export const Header = React.memo((props: HeaderProps) => {
       <div className="flex items-center gap-4">
         <Link href={ROUTES.users}>
           <Button
-              variant={"link"}
-              className={cn("p-0", {
-                "text-primary": isActiveLink(ROUTES.users),
-              })}
+            variant={"link"}
+            className={cn("p-0", {
+              "text-primary": isActiveLink(ROUTES.users),
+            })}
           >
             Пользователи
           </Button>
@@ -115,6 +120,15 @@ export const Header = React.memo((props: HeaderProps) => {
             Проекты
           </Button>
         </Link>
+        {userProfileHydrated && userProfile && (
+          <Link
+            title="Создать проект"
+            className="hover:text-primary"
+            href={ROUTES.createProject}
+          >
+            <PlusIcon className="h-4 w-4" />
+          </Link>
+        )}
         {userProfileHydrated && userProfile && <Notification />}
         {userProfileHydrated && userProfile ? (
           <UserAvatar {...userProfile} />
