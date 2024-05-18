@@ -120,6 +120,18 @@ export const Header = React.memo((props: HeaderProps) => {
             Проекты
           </Button>
         </Link>
+        {userProfileHydrated && userProfile?.roles.includes("ADMIN") && (
+          <Link href={ROUTES.adminPanel}>
+            <Button
+              variant={"link"}
+              className={cn("p-0", {
+                "text-primary": isActiveLink(ROUTES.adminPanel),
+              })}
+            >
+              Админ панель
+            </Button>
+          </Link>
+        )}
         {userProfileHydrated && userProfile && (
           <Link
             title="Создать проект"

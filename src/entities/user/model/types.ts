@@ -54,12 +54,14 @@ export const UserRatingMapper: Record<UserRatingType, string> = {
 
 export type UserRatingsType = Record<UserRatingType, number>;
 
+export type UserRoleType = "ADMIN" | "USER";
+
 export type UserType = {
   id: number;
   userId: number;
   login: string;
   email: string;
-  roles: string[];
+  roles: UserRoleType[];
   rolesForProject: RoleType[];
   avatar: string | null;
   firstName: string;
@@ -87,7 +89,7 @@ export type GetUserProjectsParams = {
 
 export type GetUserProjectsResponse = WithPagination<ProjectType[]>;
 
-export type GetAllUsersResponse = WithPagination<UserType[]>
+export type GetAllUsersResponse = WithPagination<UserType[]>;
 
 export type GetUserProjectsRequestConfig = RequestConfig<GetUserProjectsParams>;
 
@@ -116,7 +118,7 @@ export type GetAllUsersParams = {
   limit: number;
   search: string | null;
   roles: RoleType[];
-}
+};
 
 export type DeleteUserRolesRequestConfig = RequestConfig<DeleteUserRolesParams>;
-export type GetAllUsersParamsConfig = RequestConfig<GetAllUsersParams>
+export type GetAllUsersParamsConfig = RequestConfig<GetAllUsersParams>;

@@ -8,4 +8,8 @@ export const ROUTES = {
   logout: "/logout",
   users: "/users",
   createProject: "/projects/create",
+  adminPanel: "/admin_panel",
+  adminPanelUsers: "/admin-panel/users",
+  adminPanelEvents: "/admin-panel/events",
+  adminPanelProjects: "/admin-panel/projects",
 };
